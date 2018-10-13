@@ -7,6 +7,7 @@ import GameLogic.Inventory.BagFullThrowable;
 import GameLogic.Inventory.Items.Item;
 import GameLogic.State.UI.*;
 import GameLogic.State.*;
+import myFirstGame.Items.Charcoal;
 import myFirstGame.Items.HealthPotion;
 import myFirstGame.Items.rottenBranch;
 
@@ -28,6 +29,16 @@ public class G1R0 extends ForestTemplateRoom {
     }
 
     @Override
+    public void look(String where) {
+
+        if (!branchFoundComplete && where.equals("")) {
+            addTakeable(new rottenBranch());
+            branchFoundComplete = true;
+        } super.look(where);
+
+    }
+
+    @Override
     public void search(String what) {
         switch (what) {
 
@@ -35,11 +46,6 @@ public class G1R0 extends ForestTemplateRoom {
             case "branch":
             case "branches":
                 log.slowPrintln("They almost fall apart as you search them.");
-                if (branchFoundComplete == false) {
-                    addTakeable(new rottenBranch());
-                    branchFoundComplete = true;
-                }
-
                 break;
             case "rock":
             case "rocks":
