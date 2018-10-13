@@ -11,9 +11,15 @@ import GameLogic.State.Unit;
 public abstract class Log {
     protected List<String> log = new LinkedList<>();
     protected List<String> inputLog = new ArrayList<>();
+
+    public void printAscii(String file){
+        String asAscii = Img2Ascii.asAscii(file);
+        printSize(asAscii, 2);
+    }
+
+    public abstract void printSize(String s, int fontSize);
     public abstract void unitSay(Unit u, String s);
     public abstract void unitSay(Unit u, String s, int delay);
-
     public abstract void print(String toPrint);
     public abstract void delayPrint(String toPrint, int delay);
     public abstract void delayPrintln(String toPrint, int delay);

@@ -34,7 +34,6 @@ public abstract class State{
         this.id = id;
         this.log = log;
         this.player = player;
-        this.exits = exits();
         setDefaultActions();
         MapManager.addTile(this);
     }
@@ -82,8 +81,9 @@ public abstract class State{
 
 
     public void enter(){
-        if(this.exits == null)
+        if(exits == null)
             this.exits = exits();
+
         //print introText and call play mechanic of this state
         roomEnterLogic();
         play();
@@ -244,6 +244,7 @@ public abstract class State{
 
     public void move(String where) {
         State next = exits.get(where);
+
         if(next != null){
             JukeBox.playMP3(JukeBox.WALK);
             next.enter();
