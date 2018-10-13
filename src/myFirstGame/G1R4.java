@@ -12,7 +12,7 @@ import GameLogic.State.Player;
 
 public class G1R4 extends ForestTemplateRoom {
     public G1R4(int id, Log log, Player player) {
-        super(id, log, player, "Blocking the path is a big hole.");
+        super(id, log, player, "Watch your step. Blocking the path is a big hole.");
     }
 
     boolean riddle1Complete = false;
@@ -31,7 +31,7 @@ public class G1R4 extends ForestTemplateRoom {
 
               if((int)(Math.random()*3) >0 ) {
                   riddle1Complete = true;
-                  log.slowPrintln("Puh! You successfully jump over the hole!");
+                  log.slowPrintln("You successfully jump over the hole!");
                   if (exits.containsValue(MapManager.getTile(3))) {
                       exits.remove("west");
                       exits.put("east", MapManager.getTile(5));
@@ -43,7 +43,7 @@ public class G1R4 extends ForestTemplateRoom {
                   break;
             }
                else {
-                  log.slowPrintln("You slip and hit the ground when trying to make the jump. Ouch. ");
+                  log.slowPrintln("You slip and hit the ground when trying to make the jump. Hope nobody saw that.");
                   break;
               }
             default:

@@ -47,7 +47,7 @@ public class G1R5 extends ForestTemplateRoom {
         switch (what) {
             case "large branches":
             case "branches":
-               log.slowPrintln("Your sword cuts through the branches, and you can now move further.\n A cold chill passes through the hole you made.");
+               log.slowerPrintln("Your sword cuts through the branches. They crack loudly and fall to the ground.\n A cold chill passes through the hole you made. You can now move further.");
                searchText= "You see an old murk-rotten sign and an entrance to the Dark Forest that you made.";
                exits.put("east", MapManager.getTile(6));
                 cutComplete=true;
@@ -105,7 +105,7 @@ public class G1R5 extends ForestTemplateRoom {
                 log.slowPrintln("There are branches in the way.");
             }
             if (cutComplete) {
-                log.slowPrintln("You pass through the hole in the branches.");
+                log.slowerPrintln("You crawl through the hole in the branches.");
             }
         }
     }

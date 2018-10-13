@@ -8,15 +8,15 @@ import GameLogic.Inventory.Items.Item;
 import GameLogic.State.UI.*;
 import GameLogic.State.*;
 import myFirstGame.Items.HealthPotion;
+import myFirstGame.Items.rottenBranch;
 
 public class G1R0 extends ForestTemplateRoom {
     public G1R0(int id, Log log, Player player) {
-        super(id, log, player, "On the ground you see a few rocks, and a couple of rotten branches.");
+        super(id, log, player, "theres not much to see except for a few rocks, and a couple of rotten branches.");
     }
 
     boolean PotionFoundComplete = false;
-
-
+    boolean branchFoundComplete = false;
     @Override
     public void duck(String under) {
 
@@ -32,13 +32,16 @@ public class G1R0 extends ForestTemplateRoom {
         switch (what) {
 
             case "rotten branches":
-                log.slowPrintln("They almost fall apart as you search them.");
-                break;
-
+            case "branch":
             case "branches":
                 log.slowPrintln("They almost fall apart as you search them.");
-                break;
+                if (branchFoundComplete == false) {
+                    addTakeable(new rottenBranch());
+                    branchFoundComplete = true;
+                }
 
+                break;
+            case "rock":
             case "rocks":
                if (PotionFoundComplete == false) {
                    log.slowPrintln("Under the rocks you spot an old dusty potion. It must have been here a very long time.");
@@ -60,6 +63,14 @@ public class G1R0 extends ForestTemplateRoom {
     public void take(String what){
 
         switch (what) {
+
+            case ("rotten branch"):
+            case ("branches") :
+            case ("branch"):
+                what = "rotten branch";
+
+                break;
+
             case ("old dusty potion"):
 
                 what = "health potion";
@@ -67,9 +78,9 @@ public class G1R0 extends ForestTemplateRoom {
             case ("potion"):
 
                 what = "health potion";
-            default:
-                super.take(what);
-        }
+
+
+        }super.take(what);
 
 
     }
