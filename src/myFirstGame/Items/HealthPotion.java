@@ -1,11 +1,12 @@
 package myFirstGame.Items;
 
-import GameLogic.Inventory.Items.UsableItem;
+import GameLogic.Inventory.Items.ConsumableItem;
 
-public class HealthPotion extends UsableItem {
+
+public class HealthPotion extends ConsumableItem {
 
     public HealthPotion() {
-        super("Health Potion", "A health pot lol");
+        super("Health Potion", "A health potion");
     }
 
     @Override

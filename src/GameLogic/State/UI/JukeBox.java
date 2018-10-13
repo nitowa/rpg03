@@ -11,6 +11,11 @@ public class JukeBox extends JFXPanel {
 
     public static final String TEXT_BLIP= "textType.mp3";
     public static final String WALK= "Walk.mp3";
+    public static final String PICKUP= "pickUp.mp3";
+    public static final String DROP= "drop.mp3";
+    public static final String EQUIP= "equip.mp3";
+    public static final String UNEQUIP= "unequip.mp3";
+    public static final String CONSUME= "drink.mp3";
     private static JFXPanel panel = new JFXPanel();
 
 

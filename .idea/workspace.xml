@@ -2,20 +2,31 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a4796af8-d2e8-410a-adc0-fe864340ab20" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/CAKE.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_code_gson_gson_2_8_2.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_logging_log4j_log4j_api_2_11_0.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_logging_log4j_log4j_core_2_11_0.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/weblaf_complete_1_28.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/Drop.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Hashgraph.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/drink.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/equip.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pickUp.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/GameLogic/Inventory/Items/ConsumableItem.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/unequip.mp3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GameLogic/Inventory/Items/UsableItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameLogic/Inventory/Items/UsableItem.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GameLogic/State/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameLogic/State/Player.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GameLogic/State/State.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameLogic/State/State.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GameLogic/State/UI/JukeBox.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameLogic/State/UI/JukeBox.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/myFirstGame/Items/HealthPotion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/myFirstGame/Items/HealthPotion.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/myFirstGame/SmallTroggR2.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/myFirstGame/rpgPlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/myFirstGame/rpgPlayer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/GameLogic/Inventory/Items/UsableItem.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/GameLogic/Inventory/Items/UsableItem.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/GameLogic/State/Player.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/GameLogic/State/Player.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/GameLogic/State/State.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/GameLogic/State/State.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/GameLogic/State/UI/JukeBox.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/GameLogic/State/UI/JukeBox.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/myFirstGame/G1R0.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/myFirstGame/G1R0.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/myFirstGame/G1R2.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/myFirstGame/G1R2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/myFirstGame/G1R4.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/myFirstGame/G1R4.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/myFirstGame/G1R5.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/myFirstGame/G1R5.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/myFirstGame/Items/HealthPotion.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/myFirstGame/Items/HealthPotion.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/myFirstGame/myFirstGame.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/myFirstGame/myFirstGame.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/myFirstGame/rpgPlayer.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/myFirstGame/rpgPlayer.class" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -87,11 +98,8 @@
       <file leaf-file-name="State.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/GameLogic/State/State.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="430">
-              <caret line="83" column="30" selection-start-line="83" selection-start-column="30" selection-end-line="83" selection-end-column="30" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state relative-caret-position="-4033">
+              <caret line="85" column="30" selection-start-line="85" selection-start-column="30" selection-end-line="85" selection-end-column="30" />
             </state>
           </provider>
         </entry>
@@ -109,7 +117,7 @@
         <entry file="file://$PROJECT_DIR$/src/myFirstGame/G1R2.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="1694">
-              <caret line="70" column="26" lean-forward="true" selection-start-line="70" selection-start-column="26" selection-end-line="70" selection-end-column="26" />
+              <caret line="70" column="26" selection-start-line="70" selection-start-column="26" selection-end-line="70" selection-end-column="26" />
             </state>
           </provider>
         </entry>
@@ -373,18 +381,14 @@
               <item name="rpg03" type="b2602c69:ProjectViewProjectNode" />
               <item name="rpg03" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="GameLogic" type="462c0819:PsiDirectoryNode" />
+              <item name="State" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="rpg03" type="b2602c69:ProjectViewProjectNode" />
+              <item name="rpg03" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="myFirstGame" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="rpg03" type="b2602c69:ProjectViewProjectNode" />
-              <item name="rpg03" type="462c0819:PsiDirectoryNode" />
-              <item name="target" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="rpg03" type="b2602c69:ProjectViewProjectNode" />
-              <item name="rpg03" type="462c0819:PsiDirectoryNode" />
-              <item name="target" type="462c0819:PsiDirectoryNode" />
-              <item name="classes" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -537,12 +541,12 @@
       <workItem from="1539280115298" duration="54547000" />
       <workItem from="1539426845561" duration="3896000" />
       <workItem from="1539431513626" duration="259000" />
-      <workItem from="1539433169750" duration="3203000" />
+      <workItem from="1539433169750" duration="3633000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="139632000" />
+    <option name="totallyTimeSpent" value="140062000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="2576" height="1416" extended-state="6" />
@@ -566,9 +570,9 @@
       <window_info id="Image Layers" order="3" />
       <window_info anchor="right" id="Capture Analysis" order="4" />
       <window_info anchor="bottom" id="Version Control" order="11" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49403816" visible="true" weight="0.20872274" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49403816" visible="true" weight="0.20872274" />
       <window_info anchor="bottom" id="Terminal" order="7" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.11406995" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.11406995" />
       <window_info anchor="bottom" id="Run with VisualVM" order="10" />
       <window_info anchor="right" id="Theme Preview" order="7" />
       <window_info id="Favorites" order="5" side_tool="true" />
@@ -873,17 +877,14 @@
     <entry file="file://$PROJECT_DIR$/src/myFirstGame/G1R2.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1694">
-          <caret line="70" column="26" lean-forward="true" selection-start-line="70" selection-start-column="26" selection-end-line="70" selection-end-column="26" />
+          <caret line="70" column="26" selection-start-line="70" selection-start-column="26" selection-end-line="70" selection-end-column="26" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/GameLogic/State/State.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="430">
-          <caret line="83" column="30" selection-start-line="83" selection-start-column="30" selection-end-line="83" selection-end-column="30" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="-4033">
+          <caret line="85" column="30" selection-start-line="85" selection-start-column="30" selection-end-line="85" selection-end-column="30" />
         </state>
       </provider>
     </entry>
