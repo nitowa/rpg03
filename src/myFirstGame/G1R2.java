@@ -86,8 +86,6 @@ public class G1R2 extends CombatState {
 
         switch (what) {
             case ("helm"):
-                log.slowPrintln("That helm is not coming off with such gentle measures.");
-                break;
             case ("helmet"):
 
                 log.slowPrintln("That helm is not coming off with such gentle measures.");

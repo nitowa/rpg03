@@ -8,6 +8,7 @@ import GameLogic.State.MapManager;
 import GameLogic.State.Player;
 import GameLogic.State.State;
 import GameLogic.State.UI.*;
+import myFirstGame.Items.Charcoal;
 
 public class G1R1 extends ForestTemplateRoom {
     public G1R1(int id, Log log, Player player) {
@@ -34,7 +35,8 @@ public class G1R1 extends ForestTemplateRoom {
                 break;
             case "fire":
 
-                log.slowPrintln("You search the fire and find nothing, except that your hands have, unfortunately, now turned very black.");
+                log.slowPrintln("You search the fire and find nothing but the leftover charcoal. Your hands have also now turned very black.");
+                addTakeable(new Charcoal());
 
                 break;
 
@@ -50,6 +52,22 @@ public class G1R1 extends ForestTemplateRoom {
                 log.slowPrintln("You find nothing.");
 
         }
+
+    }
+    @Override
+    public void take(String what){
+
+        switch (what) {
+            case ("log"):
+            case ("logs"):
+            case ("chairs"):
+
+                log.slowPrintln("The logs are definitely to big to carry.");
+                break;
+            default:
+                super.take(what);
+        }
+
 
     }
 
