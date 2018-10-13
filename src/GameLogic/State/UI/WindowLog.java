@@ -257,6 +257,34 @@ public class WindowLog extends Log {
     }
 
     @Override
+    public void printSize(String msg, int fontSize) {
+
+                textArea.setEditable(true);
+                swallowInputs = false;
+
+                StyleContext sc = StyleContext.getDefaultStyleContext();
+                AttributeSet aset = sc.addAttribute(SimpleAttributeSet.EMPTY, StyleConstants.Foreground, UIColors.DEFAULT_TEXT_COLOR);
+
+                aset = sc.addAttribute(aset, StyleConstants.FontFamily, "Lucida Console");
+                aset = sc.addAttribute(aset, StyleConstants.Alignment, StyleConstants.ALIGN_JUSTIFIED);
+                aset = sc.addAttribute(aset, StyleConstants.Size, fontSize);
+
+                int len = textArea.getDocument().getLength();
+                textArea.setCaretPosition(len); //move cursor to end
+                textArea.setCharacterAttributes(aset, false); //set color
+                textArea.replaceSelection(msg); //insert text
+                setScroll();
+                textArea.setEditable(false);
+                swallowInputs = true;
+
+                len += msg.length();
+                last = len;
+                textArea.setNavigationFilter( new NavigationFilterPrefixWithBackspace(last, textArea) );
+                resetFont();
+
+    }
+
+    @Override
     public void unitSay(Unit u, String s) {
         unitSay(u, s, 50);
     }
