@@ -1,0 +1,497 @@
+package GameLogic.State.UI;
+
+
+
+import java.awt.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.lang.reflect.InvocationTargetException;
+import java.util.StringTokenizer;
+import java.util.concurrent.Semaphore;
+
+import javax.swing.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import javax.swing.text.AttributeSet;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.Caret;
+import javax.swing.text.SimpleAttributeSet;
+import javax.swing.text.StyleConstants;
+import javax.swing.text.StyleContext;
+
+import GameLogic.Inventory.Items.Item;
+import GameLogic.State.Unit;
+
+public class WindowLog extends Log {
+
+    private JTextPane textArea;
+    private JScrollPane scp;
+    private Semaphore sem = new Semaphore(0);
+    private int last = 0;
+    private Color fontColor;
+    private NavigationFilterPrefixWithBackspace filter;
+    private boolean swallowInputs = false;
+    private Caret caret;
+    private JFrame win;
+    private int backIndex = 0;
+    private boolean doBlip = false;
+
+    public void setScroll(){
+                if(textArea.getCaret().getMark() != textArea.getDocument().getLength()) {
+                    textArea.setCaretPosition(textArea.getDocument().getLength());
+                }
+                //if(scp.getHAdjustable().getValue() < scp.getHAdjustable().getMaximum())
+                //    scp.setScrollPosition(0, scp.getVAdjustable().getMaximum());
+
+    }
+
+    public WindowLog(int maxLength, Color background, Color font){
+        this.fontColor = font;
+        win = new JFrame();
+        win.getContentPane().setBackground( background );
+        win.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+
+        win.setSize(1200,800);
+        JPanel panel = new JPanel(new GridLayout());
+        panel.setDoubleBuffered(true);
+        textArea = new JTextPane();
+        textArea.setDoubleBuffered(true);
+        textArea.setCursor(Cursor.getDefaultCursor());
+        textArea.setBackground(background);
+        textArea.setEditable(false);
+
+        textArea.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                setScroll();
+            }
+        });
+
+
+        textArea.addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if(swallowInputs) {
+                    e.consume();
+                    return;
+                }
+
+                if(e.getExtendedKeyCode() == KeyEvent.VK_RIGHT) {
+                    for(String s : inputLog){
+                        System.out.println(s);
+                    }
+                }
+
+                if(e.getExtendedKeyCode() == KeyEvent.VK_UP) {
+                    if (backIndex < inputLog.size()) {
+                        textArea.select(last, textArea.getDocument().getLength());
+                        textArea.replaceSelection("");
+
+                        StyleContext sc = StyleContext.getDefaultStyleContext();
+                        AttributeSet
+                            aset =
+                            sc.addAttribute(SimpleAttributeSet.EMPTY, StyleConstants.Foreground,
+                                            UIColors.DEFAULT_TEXT_COLOR);
+
+                        aset = sc.addAttribute(aset, StyleConstants.FontFamily, "Lucida Console");
+                        aset = sc.addAttribute(aset, StyleConstants.Alignment, StyleConstants.ALIGN_JUSTIFIED);
+                        aset = sc.addAttribute(aset, StyleConstants.Size, 15);
+                        try {
+                            textArea.getDocument()
+                                .insertString(textArea.getDocument().getLength(), inputLog.get(inputLog.size()-1-backIndex), aset);
+                        } catch (BadLocationException e1) {
+                            e1.printStackTrace();
+                        }
+                        backIndex++;
+                        return;
+                    }
+                }
+                if(e.getExtendedKeyCode() == KeyEvent.VK_DOWN){
+                    if(backIndex == 0){
+                        textArea.select(last, textArea.getDocument().getLength());
+                        textArea.replaceSelection("");
+                        return;
+                    }
+                    if (backIndex > 1) {
+                        backIndex--;
+                        textArea.select(last, textArea.getDocument().getLength());
+                        textArea.replaceSelection("");
+
+                        StyleContext sc = StyleContext.getDefaultStyleContext();
+                        AttributeSet
+                            aset =
+                            sc.addAttribute(SimpleAttributeSet.EMPTY, StyleConstants.Foreground,
+                                            UIColors.DEFAULT_TEXT_COLOR);
+
+                        aset = sc.addAttribute(aset, StyleConstants.FontFamily, "Lucida Console");
+                        aset = sc.addAttribute(aset, StyleConstants.Alignment, StyleConstants.ALIGN_JUSTIFIED);
+                        aset = sc.addAttribute(aset, StyleConstants.Size, 15);
+                        try {
+                            textArea.getDocument()
+                                .insertString(textArea.getDocument().getLength(), inputLog.get(inputLog.size()-1-backIndex), aset);
+                        } catch (BadLocationException e1) {
+                            e1.printStackTrace();
+                        }
+                        return;
+                    }
+                }
+                backIndex = 0;
+                if(e.getExtendedKeyCode() == KeyEvent.VK_ENTER){
+                    sem.release(1);
+                    textArea.replaceSelection("\n");
+                }
+                setScroll();
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+
+            }
+        });
+        scp = new ModernScrollPane(textArea);
+
+        //scp = new ScrollPane();
+        scp.setBackground(background);
+
+        textArea.setCaretColor(UIColors.DEFAULT_TEXT_COLOR);
+        this.caret = textArea.getCaret();
+        setCaretVisible(false);
+        //scp.add(textArea);
+        panel.add(scp);
+
+        //panel.add(textField);
+        win.add(panel);
+        win.setVisible(true);
+        win.createBufferStrategy(3);
+    }
+
+    private void resetFont(){
+        appendToPane("", fontColor);
+    }
+
+    @Override
+    public void printColored(String toPrint, Color c) {
+        log.add(toPrint);
+        appendToPane(toPrint, c);
+        resetFont();
+    }
+
+    public void printlnColored(String toPrint, Color c){
+        log.add(toPrint);
+        appendToPane(toPrint+"\n", c);
+        resetFont();
+    }
+
+    @Override
+    public void slowPrintColored(String toPrint, Color c) {
+        log.add(toPrint);
+        delayPrintColored(toPrint + "\n", c,20);
+        resetFont();
+    }
+
+    public void slowerPrintColored(String toPrint, Color c) {
+        log.add(toPrint);
+        delayPrintColored(toPrint + "\n", c, 50);
+        resetFont();
+    }
+
+    @Override
+    public void printItemColored(Item i) {
+        printColored(""+i, i.getColor());
+    }
+
+    @Override
+    public void printlnItemColored(Item i) {
+        printlnColored(""+i, i.getColor());
+    }
+
+    @Override
+    public void slowPrintItemColored(Item i) {
+        slowerPrintColored(""+i, i.getColor());
+    }
+
+    @Override
+    public void slowerPrintItemColored(Item i) {
+        slowerPrintColored(""+i, i.getColor());
+    }
+
+    private void blip(char c){
+        try {
+            SwingUtilities.invokeAndWait(()->{
+                if(doBlip && c !=' '){
+                    JukeBox.playMP3(JukeBox.TEXT_BLIP);
+                }
+                doBlip = !doBlip;
+            });
+        } catch (InterruptedException | InvocationTargetException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public void delayPrintColored(String toPrint, Color c, int delay){
+        log.add(toPrint);
+        for(int i = 0; i < toPrint.length(); i++){
+            appendToPane(""+toPrint.charAt(i), c);
+
+            blip(toPrint.charAt(i));
+
+            try {
+                Thread.sleep(delay);
+            } catch (InterruptedException e) {
+
+            }
+        }
+    }
+
+    @Override
+    public void unitSay(Unit u, String s) {
+        unitSay(u, s, 50);
+    }
+
+    @Override
+    public void unitSay(Unit u, String s, int delay) {
+        try {
+            SwingUtilities.invokeAndWait(()->{
+                setCaretVisible(false);
+            });
+        } catch (InterruptedException | InvocationTargetException e) {
+            e.printStackTrace();
+        }
+        s=s.replace("\n", "");
+        StringTokenizer tokenizer = new StringTokenizer(s);
+        int maxwid = 45;
+        int height = 1;
+        int currentLineWidth = 0;
+
+        StringBuilder content = new StringBuilder();
+
+        while (tokenizer.hasMoreElements()){
+            String word = tokenizer.nextToken()+" ";
+            if(word.length() > maxwid) { //the word can never fit
+                maxwid = word.length();
+                content.append(word).append("\n");
+                height++;
+                currentLineWidth = 0;
+                continue;
+            }
+
+            if(word.length()+currentLineWidth > maxwid){ //the word does not fit
+                height++;
+                content.append("\n").append(word);
+                currentLineWidth = word.length();
+            }else{ //word fits, just append)
+                content.append(word);
+                currentLineWidth += word.length();
+            }
+        }
+
+        //print box
+        String header = "+- "+u.getName()+" "+charMultiply('-', maxwid-1-u.getName().length())+"+\n";
+        String box = header;
+        for(int i = 0; i < height+2; i++) {
+            box += ("|" + charMultiply(' ', maxwid + 2) + "|\n");
+        }
+        box+=("+"+charMultiply('-', maxwid+2)+"+\n");
+
+        println(box);
+
+        int boxWritableStartOffset = header.length()*2+2; //2 full rows + "|;
+        int boxLen = box.length();
+
+        String[] lines = content.toString().split("\n");
+        try {
+            SwingUtilities.invokeAndWait(()->{
+                textArea.setNavigationFilter(null);
+            });
+        } catch (InterruptedException | InvocationTargetException e) {
+            e.printStackTrace();
+        }
+
+        textArea.setEditable(false);
+
+        for(int i = 0; i < lines.length; i++){
+
+            int lineStart = textArea.getDocument().getLength() - boxLen + boxWritableStartOffset + i*header.length() -1;
+
+            for(int j = 0; j < lines[i].length(); j++){
+                try {
+                    SwingUtilities.invokeAndWait(()->{
+                        textArea.setEditable(true);
+                    });
+                } catch (InterruptedException | InvocationTargetException e) {
+                    e.printStackTrace();
+                }
+
+                char c = lines[i].charAt(j);
+                blip(c);
+                textArea.select(lineStart, lineStart+1);
+                textArea.replaceSelection(""+lines[i].charAt(j));
+                try {
+                    SwingUtilities.invokeAndWait(()->{
+                        textArea.setEditable(false);
+                    });
+                } catch (InterruptedException | InvocationTargetException e) {
+                    e.printStackTrace();
+                }
+                lineStart++;
+                try {
+                    Thread.sleep(delay);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        textArea.setEditable(false);
+
+
+        //last = textArea.getDocument().getLength()-1;
+        try {
+            SwingUtilities.invokeAndWait(()->{
+                textArea.setNavigationFilter( new NavigationFilterPrefixWithBackspace(last, textArea) );
+            });
+        } catch (InterruptedException | InvocationTargetException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    private String charMultiply(char c, int number){
+        StringBuilder ret = new StringBuilder();
+        for(int i = 0; i < number; i++){
+            ret.append(c);
+        }
+        return ret.toString();
+    }
+
+    @Override
+    public void print(String toPrint) {
+        log.add(toPrint);
+        appendToPane(toPrint, UIColors.DEFAULT_TEXT_COLOR);
+    }
+
+    public void println(String toPrint){
+        log.add(toPrint);
+        appendToPane(toPrint+"\n", UIColors.DEFAULT_TEXT_COLOR);
+    }
+
+    @Override
+    public void slowPrint(String toPrint) {
+        log.add(toPrint);
+        delayPrint(toPrint , 20);
+    }
+
+    @Override
+    public void slowPrintln(String toPrint) {
+        log.add(toPrint);
+        delayPrint(toPrint + "\n", 20);
+    }
+
+    @Override
+    public void slowerPrintln(String toPrint) {
+        log.add(toPrint);
+        delayPrint(toPrint + "\n", 50);
+    }
+
+    @Override
+    public void delayPrintln(String toPrint, int delay){
+        delayPrint(toPrint+"\n", delay);
+    }
+
+    @Override
+    public void delayPrint(String toPrint, int delay){
+        delayPrintColored(toPrint, UIColors.DEFAULT_TEXT_COLOR, delay);
+    }
+
+    private void appendToPane(String msg, Color c)
+    {
+        try {
+            SwingUtilities.invokeAndWait(() -> {
+                textArea.setEditable(true);
+                swallowInputs = false;
+
+                StyleContext sc = StyleContext.getDefaultStyleContext();
+                AttributeSet aset = sc.addAttribute(SimpleAttributeSet.EMPTY, StyleConstants.Foreground, c);
+
+                aset = sc.addAttribute(aset, StyleConstants.FontFamily, "Lucida Console");
+                aset = sc.addAttribute(aset, StyleConstants.Alignment, StyleConstants.ALIGN_JUSTIFIED);
+                aset = sc.addAttribute(aset, StyleConstants.Size, 15);
+
+                int len = textArea.getDocument().getLength();
+                textArea.setCaretPosition(len); //move cursor to end
+                textArea.setCharacterAttributes(aset, false); //set color
+                textArea.replaceSelection(msg); //insert text
+                setScroll();
+                textArea.setEditable(false);
+                swallowInputs = true;
+
+                len += msg.length();
+                last = len;
+                textArea.setNavigationFilter( new NavigationFilterPrefixWithBackspace(last, textArea) );
+
+            });
+        } catch (InterruptedException | InvocationTargetException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public String read() {
+        try {
+            SwingUtilities.invokeAndWait(()->{
+                textArea.setEditable(true);
+                setCaretVisible(true);
+                swallowInputs = false;
+                last = textArea.getDocument().getLength();
+                textArea.setNavigationFilter( new NavigationFilterPrefixWithBackspace(last, textArea) );
+            });
+        } catch (InterruptedException | InvocationTargetException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            sem.acquire(1);
+        } catch (InterruptedException e) {
+        }
+        sem.drainPermits();
+        String ret = null;
+        try {
+            SwingUtilities.invokeAndWait(()->{
+                textArea.setNavigationFilter( null );
+                swallowInputs = true;
+                setCaretVisible(false);
+                setScroll();
+                textArea.setEditable(false);
+            });
+        } catch (InterruptedException | InvocationTargetException e) {
+            e.printStackTrace();
+        }
+        try {
+            ret = textArea.getDocument().getText(0, textArea.getDocument().getLength()).substring(last).trim();
+            if(!ret.equals(""))
+               this.inputLog.add(ret);
+
+        } catch (BadLocationException e) {
+            e.printStackTrace();
+        }
+
+        return ret;
+    }
+
+    private void setCaretVisible(boolean val){
+        caret.setVisible(val);
+        caret.setSelectionVisible(val);
+    }
+}
