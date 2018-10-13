@@ -1,10 +1,12 @@
 package GameLogic.State;
 
+import java.awt.*;
 import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
 
 import GameLogic.Inventory.BagFullThrowable;
+import GameLogic.Inventory.Items.ConsumableItem;
 import GameLogic.Inventory.Items.EquippableItem;
 import GameLogic.Inventory.Items.Item;
 import GameLogic.Inventory.Items.UsableItem;
@@ -93,7 +95,14 @@ public abstract class State{
 
     public void use(String what){
         Item item = player.getInventory().getItemByIndexOrName(what);
-
+        if (item instanceof ConsumableItem) {
+            JukeBox.playMP3(JukeBox.CONSUME);
+            log.slowPrint("You drink ");
+            log.printlnItemColored(item);
+            player.consumeItem((ConsumableItem) item);
+            player.getInventory().silentRemove(item);
+            return;
+        }
         if(item instanceof UsableItem){
             log.print("You use ");
             log.printlnItemColored(item);
@@ -112,6 +121,7 @@ public abstract class State{
 
         if(item != null){
             log.print("You dropped ");
+            JukeBox.playMP3(JukeBox.DROP);
             log.printlnItemColored(item);
             addTakeable(item);
             player.getInventory().silentRemove(item);
@@ -141,6 +151,7 @@ public abstract class State{
 
         if(item instanceof EquippableItem) {
             player.getInventory().equip((EquippableItem) item);
+            JukeBox.playMP3(JukeBox.EQUIP);
         }else if(item == null){
             log.slowPrintln("Unknown item");
         }else{
@@ -149,7 +160,9 @@ public abstract class State{
     }
 
     public void unequip(String what){
+
         player.getInventory().unequip(what);
+        JukeBox.playMP3(JukeBox.UNEQUIP);
     }
 
     public void help(String s){
@@ -211,6 +224,7 @@ public abstract class State{
         Item item = takeableItems.get(what);
         try {
             player.getInventory().add(item);
+            JukeBox.playMP3(JukeBox.PICKUP);
             removeTakeable(what);
         } catch (BagFullThrowable bagFullThrowable) {
             log.slowPrintln("Your inventory is full");

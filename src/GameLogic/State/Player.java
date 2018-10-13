@@ -1,6 +1,7 @@
 package GameLogic.State;
 
 import GameLogic.Inventory.Inventory;
+import GameLogic.Inventory.Items.ConsumableItem;
 import GameLogic.Inventory.Items.UsableItem;
 import GameLogic.State.UI.Log;
 
@@ -26,6 +27,7 @@ public abstract class Player extends Unit {
     }
 
     public abstract void useItem(UsableItem item);
+    public abstract void consumeItem(ConsumableItem item);
 
     @Override
     public int calculateDamageDealt() {
