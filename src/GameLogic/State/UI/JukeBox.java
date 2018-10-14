@@ -38,7 +38,7 @@ public class JukeBox extends JFXPanel {
     private static JFXPanel panel = new JFXPanel();
 
     public static final void playMP3(String file) {
-        playMP3(file, false);
+        playMP3Times(file, 1);
     }
 
     public static final void stopAllLoopsExcept(String file){
@@ -65,14 +65,19 @@ public class JukeBox extends JFXPanel {
 
 
     public static final void playMP3(String file, boolean loop){
+        if(loop)
+            playMP3Times(file, -1);
+        else
+            playMP3Times(file, 1);
+    }
+    public static final void playMP3Times(String file, int count){
 
         if(!looping.containsKey(file)){
             Media hit = new Media(new File(file).toURI().toString());
             MediaPlayer mediaPlayer = new MediaPlayer(hit);
-            if(loop) {
-                mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
+            mediaPlayer.setCycleCount(count);
+            if(count == -1)
                 looping.put(file, mediaPlayer);
-            }
             mediaPlayer.play();
             mediaPlayer.setVolume(1);
         }

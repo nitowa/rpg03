@@ -38,6 +38,8 @@ public class myFirstGame extends Game {
             e.printStackTrace();
         }
 
+//        JukeBox.playMP3Times(JukeBox.WALK, 5);
+
         log.slowPrintln("Test started.");
         //log.printAscii("cat.jpg");
 
