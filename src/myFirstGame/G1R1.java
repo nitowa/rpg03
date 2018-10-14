@@ -31,7 +31,7 @@ public class G1R1 extends ForestTemplateRoom {
         switch (what) {
 
             case "camp":
-                log.slowPrintln("Looks like a camp for two people. Everything of value has presumably been stolen.");
+                log.slowPrintln("Looks like a camp for two people. Everything of value appears to have been pillaged.");
                 break;
             case "fire":
 

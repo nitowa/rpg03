@@ -71,6 +71,7 @@ public class G1R0 extends ForestTemplateRoom {
         switch (what) {
 
             case ("rotten branch"):
+            case ("rotten branches"):
             case ("branches") :
             case ("branch"):
                 what = "rotten branch";

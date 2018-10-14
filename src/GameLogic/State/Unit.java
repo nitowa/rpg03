@@ -61,6 +61,6 @@ public abstract class Unit {
     }
 
     public abstract int calculateDamageDealt();
-    public abstract int calculateDamageTaken(int dmg, String attackTarget);
+    public abstract int calculateDamageTaken(int dmg, String attackTarget) throws YouDied;
 
 }

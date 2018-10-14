@@ -103,7 +103,7 @@ public class G1R2 extends CombatState {
             YoungTrogg.takeDamage(player.calculateDamageDealt(), who);
 
         } catch (YouDied youDied) {
-            searchText = "With the Trogg gone, you notice how much better the forest smells.";
+            searchText = "With the Trogg gone, the forest definitely smells better.";
             exits.put("west", MapManager.getTile(21));
             exits.put("south", MapManager.getTile(1));
             exits.put("north", MapManager.getTile(3));

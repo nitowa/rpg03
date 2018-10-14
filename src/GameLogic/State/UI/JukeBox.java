@@ -16,6 +16,21 @@ public class JukeBox extends JFXPanel {
     public static final String EQUIP= "equip.mp3";
     public static final String UNEQUIP= "unequip.mp3";
     public static final String CONSUME= "drink.mp3";
+    public static final String WOODHIT= "woodHit.mp3";
+    public static final String SWORDHIT= "swordHit.mp3";
+    public static final String HITMETAL= "hitmetal.mp3";
+    public static final String UNARMEDHIT= "hit.mp3";
+    public static final String WATERDIP= "waterDip.mp3";
+    public static final String WATERJUMP= "waterJump.mp3";
+    public static final String JUMP= "jump.mp3";
+    public static final String WALK_WOOD= "walkWood.mp3";
+    public static final String WOODCRACK= "woodCrack.mp3";
+    public static final String MOVINGTREES= "movingTrees.mp3";
+
+    //atmosphere tracks.
+    public static final String BACKGROUND_WIND= "wind.mp3";
+
+
     private static JFXPanel panel = new JFXPanel();
 
 
