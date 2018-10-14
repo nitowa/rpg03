@@ -13,6 +13,7 @@ public abstract class ForestTemplateRoom extends InitState {
 
     @Override
     protected void onEnter() {
+        JukeBox.stopAllLoopsExcept(JukeBox.BACKGROUND_WIND);
         JukeBox.playMP3(JukeBox.BACKGROUND_WIND, true);
     }
 }

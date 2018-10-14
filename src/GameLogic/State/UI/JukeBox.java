@@ -41,11 +41,17 @@ public class JukeBox extends JFXPanel {
         playMP3(file, false);
     }
 
+    public static final void stopAllLoopsExcept(String file){
+        for(String key : looping.keySet()){
+            if(!key.equals(file)) {
+                stopLoop(key);
+            }
+        }
+    }
+
     public static final void stopLoop(){
         for(String file : looping.keySet()){
-            looping.get(file).setCycleCount(0);
-            looping.get(file).stop();
-            looping.remove(file);
+            stopLoop(file);
         }
     }
 
