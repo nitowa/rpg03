@@ -3,14 +3,13 @@ package myFirstGame;
 import java.util.HashMap;
 import java.util.Map;
 
-import GameLogic.Inventory.BagFullThrowable;
-import GameLogic.Inventory.Items.Item;
 import GameLogic.State.UI.*;
 import GameLogic.State.*;
 import myFirstGame.Items.HealthPotion;
 import myFirstGame.Items.rottenBranch;
+import myFirstGame.RoomTemplates.StartingAreaTemplateRoom;
 
-public class G1R0 extends ForestTemplateRoom {
+public class G1R0 extends StartingAreaTemplateRoom {
     public G1R0(int id, Log log, Player player) {
         super(id, log, player, "theres not much to see except for a few rocks, and a couple of rotten branches.");
     }
@@ -28,6 +27,16 @@ public class G1R0 extends ForestTemplateRoom {
     }
 
     @Override
+    public void look(String where) {
+
+        if (!branchFoundComplete && where.equals("")) {
+            addTakeable(new rottenBranch());
+            branchFoundComplete = true;
+        } super.look(where);
+
+    }
+
+    @Override
     public void search(String what) {
         switch (what) {
 
@@ -35,11 +44,6 @@ public class G1R0 extends ForestTemplateRoom {
             case "branch":
             case "branches":
                 log.slowPrintln("They almost fall apart as you search them.");
-                if (branchFoundComplete == false) {
-                    addTakeable(new rottenBranch());
-                    branchFoundComplete = true;
-                }
-
                 break;
             case "rock":
             case "rocks":
@@ -65,6 +69,7 @@ public class G1R0 extends ForestTemplateRoom {
         switch (what) {
 
             case ("rotten branch"):
+            case ("rotten branches"):
             case ("branches") :
             case ("branch"):
                 what = "rotten branch";

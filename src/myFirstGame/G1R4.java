@@ -8,9 +8,11 @@ import GameLogic.State.State;
 import GameLogic.State.UI.*;
 import GameLogic.State.MapManager;
 import GameLogic.State.Player;
+import myFirstGame.RoomTemplates.ForestTemplateRoom;
+import myFirstGame.RoomTemplates.StartingAreaTemplateRoom;
 
 
-public class G1R4 extends ForestTemplateRoom {
+public class G1R4 extends StartingAreaTemplateRoom {
     public G1R4(int id, Log log, Player player) {
         super(id, log, player, "Watch your step. Blocking the path is a big hole.");
     }
@@ -28,10 +30,11 @@ public class G1R4 extends ForestTemplateRoom {
 
             case "big hole":
             case "hole":
-
+                JukeBox.playMP3(JukeBox.JUMP);
+                JukeBox.playMP3(JukeBox.PICKUP);
               if((int)(Math.random()*3) >0 ) {
                   riddle1Complete = true;
-                  log.slowPrintln("You successfully jump over the hole!");
+                  log.slowPrintln("Puh! You successfully jump over the hole. That could have gone worse.");
                   if (exits.containsValue(MapManager.getTile(3))) {
                       exits.remove("west");
                       exits.put("east", MapManager.getTile(5));

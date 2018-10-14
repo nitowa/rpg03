@@ -8,13 +8,14 @@ import GameLogic.State.UI.*;
 import GameLogic.State.MapManager;
 import GameLogic.State.Player;
 import myFirstGame.Items.OldHelmet;
+import myFirstGame.RoomTemplates.StartingAreaTemplateRoom;
 
-public class G1R3 extends ForestTemplateRoom {
+public class G1R3 extends StartingAreaTemplateRoom {
     public G1R3(int id, Log log, Player player) {
         super(id, log, player, "It looks like a relatively empty clearing.");
     }
 
-
+boolean helmetSpawned = false;
     @Override
     public void duck(String under) {
 
@@ -42,6 +43,14 @@ public class G1R3 extends ForestTemplateRoom {
 
 
     }
+    public void look(String where) {
+
+        if (!helmetSpawned && where.equals("")) {
+            addTakeable(new OldHelmet());
+            helmetSpawned = true;
+        } super.look(where);
+
+    }
 
     @Override
     public void search(String what) {
@@ -50,11 +59,17 @@ public class G1R3 extends ForestTemplateRoom {
 
             case "empty clearing":
                 log.slowPrintln("Indeed, an empty clearing. . . . \nBut upon further inspection, you notice someone has dropped an old helmet.");
+                if (!helmetSpawned) {
                 addTakeable(new OldHelmet());
+                helmetSpawned = true;
+                }
                 break;
             case "clearing":
                 log.slowPrintln("Indeed, an empty clearing. . . . \nBut upon further inspection, you notice someone has dropped an old helmet.");
-                addTakeable(new OldHelmet());
+                if (!helmetSpawned) {
+                    addTakeable(new OldHelmet());
+                    helmetSpawned = true;
+                }
                 break;
             case "helmet":
                 log.slowPrintln("A helmet that appears to have been dropped recently.");

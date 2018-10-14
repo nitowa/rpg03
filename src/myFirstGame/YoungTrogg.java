@@ -1,6 +1,7 @@
 package myFirstGame;
 
 import GameLogic.State.*;
+import GameLogic.State.UI.JukeBox;
 import GameLogic.State.UI.Log;
 import GameLogic.State.UI.UIColors;
 
@@ -17,39 +18,56 @@ public class YoungTrogg extends Enemy {
     @Override
     protected void performAction(Unit target) throws YouDied {
 
-
         log.slowPrintln("The Trogg swings his club!");
-        log.slowerPrintln("Grhrauaa!");
+        JukeBox.playMP3(JukeBox.WOODHIT);
+        log.unitSay(this,"Gruahhaa!");
         player.takeDamage(1);
-
     }
-
-
     @Override
     public int calculateDamageDealt() {
-
         return 0;
     }
 
     @Override
-    public int calculateDamageTaken(int dmg, String attackTarget) {
+    public int calculateDamageTaken(int dmg, String attackTarget) throws YouDied {
 
-        if (attackTarget.equals("helmet") || attackTarget.equals("helm") || attackTarget.equals("head")){
+        if(currHP <= 1 && (attackTarget.equals("head"))) {
+            JukeBox.playMP3(JukeBox.UNARMEDHIT);
+            log.slowerPrintln("You finally land a blow on the putrid creatures head! In its dazed state, the Trogg stumbles away.");
+
+            throw new YouDied(this);
+
+        }
+
+        if (!helmetOff && (attackTarget.equals("helmet") || attackTarget.equals("helm") || attackTarget.equals("head"))){
             helmetOff = true;
+            JukeBox.playMP3(JukeBox.HITMETAL);
             log.slowPrintln("You swing and land a critical hit on the Troggs head, successfully knocking of its helmet!");
             return 1;
-        }else if (helmetOff) {
-            return maxHP-1;
+        }
+        else if (helmetOff && (attackTarget.equals("helm") || attackTarget.equals("helmet"))) {
+            JukeBox.playMP3(JukeBox.HITMETAL);
+            log.slowPrintln("The helmet already lies lifeless on the ground.");
+            return 0;
+        }
+        else if (helmetOff && attackTarget.equals("head")) {
+            JukeBox.playMP3(JukeBox.UNARMEDHIT);
+            log.slowerPrintln("You land a blow on the putrid creatures head! In its dazed state, the Trogg stumbles away.");
+            throw new YouDied(this);
+
         }else{
             switch ((int) (Math.random() * 3)) {
                 case 0:
-                    log.slowPrintln("You randomly swing and miss the Trogg completely!");
+                    JukeBox.playMP3(JukeBox.UNARMEDHIT);
+                    log.slowPrintln("You swing and miss the Trogg completely!");
                     return 0;
                 case 1:
-                    log.slowPrintln("You randomly swing and hit the trogg in the shoulder. Your hand hurts.");
+                    JukeBox.playMP3(JukeBox.UNARMEDHIT);
+                    log.slowPrintln("You swing and hit the trogg in the shoulder. Your hand hurts.");
                     return 0;
                 case 2:
-                    log.slowPrintln("You randomly swing and land a hit on the Troggs hardened belly.");
+                    JukeBox.playMP3(JukeBox.UNARMEDHIT);
+                    log.slowPrintln("You swing and land a hit on the Troggs hardened belly.");
                     return 0;
             }
         }
@@ -65,10 +83,6 @@ public class YoungTrogg extends Enemy {
         this.currHP -= taken;
         log.print(name + " took ");
         log.printlnColored(taken + " damage", UIColors.DAMAGE_RED);
-        if(currHP <= 1) {
-            log.slowerPrintln("You finally land a blow on the putrid creatures head! In its dazed state, the Trogg runs away.");
 
-            throw new YouDied(this);
-        }
     }
 }
