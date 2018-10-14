@@ -6,6 +6,6 @@ echo adding .gitignore
 git add .gitignore
 echo adding pom.xml
 git add pom.xml
-echo adding this script
-git add gitAdd.sh
+echo adding ADD
+git add ADD
 echo success

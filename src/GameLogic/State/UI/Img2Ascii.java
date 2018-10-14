@@ -13,8 +13,6 @@ public class Img2Ascii {
 
     private BufferedImage img;
     private double pixval;
-    private PrintWriter prntwrt;
-    private FileWriter filewrt;
 
     public String convertToAscii(String imgname) {
         try {
