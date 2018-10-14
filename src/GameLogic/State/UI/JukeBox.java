@@ -6,6 +6,8 @@ import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.Media;
 
 import java.io.File;
+import java.util.HashMap;
+import java.util.Map;
 
 public class JukeBox extends JFXPanel {
 
@@ -31,15 +33,45 @@ public class JukeBox extends JFXPanel {
     public static final String BACKGROUND_WIND= "wind.mp3";
 
 
+    private static Map<String, MediaPlayer> looping = new HashMap<>();
+
     private static JFXPanel panel = new JFXPanel();
 
+    public static final void playMP3(String file) {
+        playMP3(file, false);
+    }
 
-    public static final void playMP3(String file){
+    public static final void stopLoop(){
+        for(String file : looping.keySet()){
+            looping.get(file).setCycleCount(0);
+            looping.get(file).stop();
+            looping.remove(file);
+        }
+    }
 
-        Media hit = new Media(new File(file).toURI().toString());
-        MediaPlayer mediaPlayer = new MediaPlayer(hit);
-        mediaPlayer.play();
-        mediaPlayer.setVolume(1);
+    public static final void stopLoop(String file){
+        if(looping.containsKey(file)){
+            looping.get(file).setCycleCount(0);
+            looping.get(file).stop();
+            looping.remove(file);
+        }
+    }
+
+
+    public static final void playMP3(String file, boolean loop){
+
+        if(!looping.containsKey(file)){
+            Media hit = new Media(new File(file).toURI().toString());
+            MediaPlayer mediaPlayer = new MediaPlayer(hit);
+            if(loop) {
+                mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
+                looping.put(file, mediaPlayer);
+            }
+            mediaPlayer.play();
+            mediaPlayer.setVolume(1);
+        }
+
+
     }
 
 }

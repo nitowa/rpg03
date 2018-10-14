@@ -7,6 +7,7 @@ import GameLogic.State.State;
 import GameLogic.State.UI.JukeBox;
 import GameLogic.State.UI.Log;
 import myFirstGame.Items.Plank;
+import myFirstGame.RoomTemplates.ForestTemplateRoom;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -16,24 +17,15 @@ public class G1R9 extends ForestTemplateRoom {
         super(id, log, player, "The road ahead is engulfed in a pool of mud.");
         try {
             actions.put("put", this.getClass().getMethod("put", String.class));
-        } catch (NoSuchMethodException e) {
-            e.printStackTrace();
-        }
-        try {
+            actions.put("lay", this.getClass().getMethod("lay", String.class));
             actions.put("place", this.getClass().getMethod("place", String.class));
         } catch (NoSuchMethodException e) {
             e.printStackTrace();
         }
-        try {
-            actions.put("lay", this.getClass().getMethod("lay", String.class));
-        } catch (NoSuchMethodException e) {
-            e.printStackTrace();
-        }
-
     }
 
     boolean mudSearched= false;
-boolean plankPlaced = false;
+    boolean plankPlaced = false;
 
 
     @Override
@@ -49,41 +41,22 @@ boolean plankPlaced = false;
     }
 
     public void put(String what) {
-        Item item = player.getInventory().getItemByIndexOrName(what);
-        Map<String, State> map = new HashMap<>();
-        switch (what) {
-            case "plank":
-                log.slowPrintln("Put plank on what?");
-                break;
-            case "plank on mud":
-            case "plank on pool":
-            case "plank on pool of mud":
-                if (!plankPlaced && (item instanceof Plank)) {
-                    log.slowPrintln("You place the plank over the pool of mud. Lets hope it holds.");
-                    searchText="The road ahead is engulfed in a pool of mud. Your plank is holding up, but it's definitely uncertain for how long.";
-                    if(item != null){
-                        JukeBox.playMP3(JukeBox.DROP);
-                        player.getInventory().silentRemove(item);
-                    }
-                    plankPlaced = true;
-                    exits.put("east", MapManager.getTile(10));
-                    break;
-                }
-            default: log.slowPrintln("Put what?");
-
-        }
+        place(what);
     }
 
     public void place(String what) {
-        Item item = player.getInventory().getItemByIndexOrName(what);
-        Map<String, State> map = new HashMap<>();
+
+        System.out.println(what);
 
         switch (what) {
-            case "plank":
 
             case "plank on mud":
             case "plank on pool":
             case "plank on pool of mud":
+            case "plank":
+                Item item = player.getInventory().getItemByIndexOrName("plank");
+
+                System.out.println(what);
                 if (!plankPlaced && (item instanceof Plank)) {
                     log.slowPrintln("You place the plank over the pool of mud. Lets hope it holds.");
                     searchText="The road ahead is engulfed in a pool of mud. Your plank is holding up, but it's definitely uncertain for how long.";
@@ -92,13 +65,18 @@ boolean plankPlaced = false;
                         player.getInventory().silentRemove(item);
                     }
                     plankPlaced = true;
-                    exits.put("east", MapManager.getTile(10));
+                    exits.put("plank", MapManager.getTile(10));
                     break;
                 }
             default: log.slowPrintln("Place what?");
 
         }
     }
+
+    public void lay (String what) {
+        place(what);
+    }
+
     @Override
     public void use (String what) {
 
@@ -111,33 +89,7 @@ boolean plankPlaced = false;
 
     }
 
-    public void lay (String what) {
-        Item item = player.getInventory().getItemByIndexOrName(what);
-        Map<String, State> map = new HashMap<>();
 
-        switch (what) {
-            case "plank":
-                log.slowPrintln("Lay plank on what?");
-                break;
-            case "plank on mud":
-            case "plank on pool":
-            case "plank on pool of mud":
-                if (!plankPlaced && (item instanceof Plank)) {
-                    log.slowPrintln("You place the plank over the pool of mud. Lets hope it holds.");
-                    searchText="The road ahead is engulfed in a pool of mud. Your plank is holding up, but it's definitely uncertain for how long.";
-                    if(item != null){
-                        JukeBox.playMP3(JukeBox.DROP);
-                        player.getInventory().silentRemove(item);
-                    }
-                    plankPlaced = true;
-                    exits.put("east", MapManager.getTile(10));
-                    break;
-                }
-            default: log.slowPrintln("Lay what?");
-
-        }
-
-    }
     @Override
     public void take(String what) {
 

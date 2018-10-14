@@ -8,9 +8,11 @@ import GameLogic.State.State;
 import GameLogic.State.UI.*;
 import GameLogic.State.MapManager;
 import GameLogic.State.Player;
+import myFirstGame.RoomTemplates.ForestTemplateRoom;
+import myFirstGame.RoomTemplates.StartingAreaTemplateRoom;
 
 
-public class G1R4 extends ForestTemplateRoom {
+public class G1R4 extends StartingAreaTemplateRoom {
     public G1R4(int id, Log log, Player player) {
         super(id, log, player, "Watch your step. Blocking the path is a big hole.");
     }

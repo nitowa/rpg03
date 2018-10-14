@@ -4,6 +4,7 @@ import GameLogic.State.Player;
 import GameLogic.State.State;
 import GameLogic.State.UI.JukeBox;
 import GameLogic.State.UI.Log;
+import myFirstGame.RoomTemplates.ForestTemplateRoom;
 
 import java.util.Map;
 

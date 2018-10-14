@@ -3,31 +3,28 @@ package myFirstGame;
 import java.util.HashMap;
 import java.util.Map;
 
-import GameLogic.Inventory.Items.Item;
 import GameLogic.Inventory.Items.SharpWeapon;
 import GameLogic.State.State;
 import GameLogic.State.UI.*;
 import GameLogic.State.MapManager;
 import GameLogic.State.Player;
 import myFirstGame.Items.ShortSword;
+import myFirstGame.RoomTemplates.ForestTemplateRoom;
+import myFirstGame.RoomTemplates.StartingAreaTemplateRoom;
 
 
-public class G1R5 extends ForestTemplateRoom {
+public class G1R5 extends StartingAreaTemplateRoom {
     public G1R5(int id, Log log, Player player) {
-        super(id, log, player, "The forest appears to thicken. Large branches make it impossible to go any further.\nNext to the branches there lies an old half-rotten sign.Dev tip: Short sword on ground");
+        super(id, log, player,
+              "The forest appears to thicken. Large branches make it impossible to go any further.\nNext to the branches there lies an old half-rotten sign.Dev tip: Short sword on ground");
 
         try {
             actions.put("cut", this.getClass().getMethod("cut", String.class));
-        } catch (NoSuchMethodException e) {
-            e.printStackTrace();
-        }
-        try {
             actions.put("read", this.getClass().getMethod("read", String.class));
         } catch (NoSuchMethodException e) {
             e.printStackTrace();
         }
-
-        }
+    }
 
 
     boolean swordSpawned = false;
@@ -45,13 +42,13 @@ public class G1R5 extends ForestTemplateRoom {
     }
 
     @Override
-    public void look(String where) {
-
-        if (!swordSpawned && where.equals("")) {
+    public void onEnter(){
+        if (!swordSpawned) {
             addTakeable(new ShortSword());
             swordSpawned = true;
-        } super.look(where);
+        }
 
+        super.onEnter();
     }
 
 
@@ -68,9 +65,9 @@ public class G1R5 extends ForestTemplateRoom {
                 JukeBox.playMP3(JukeBox.SWORDHIT);
                 JukeBox.playMP3(JukeBox.WOODCRACK);
                 log.slowerPrintln("Your sword cuts through the branches. They crack loudly and fall to the ground.\nA cold chill passes through the hole you made. You can now move further.");
-               searchText= "You see an old murk-rotten sign and an entrance to the Dark Forest that you made.";
+                searchText= "You see an old murk-rotten sign and an entrance to the Dark Forest that you made.";
 
-                    JukeBox.playMP3(JukeBox.BACKGROUND_WIND);
+                JukeBox.playMP3(JukeBox.BACKGROUND_WIND, true);
 
                exits.put("east", MapManager.getTile(6));
                 cutComplete=true;
@@ -135,10 +132,6 @@ public class G1R5 extends ForestTemplateRoom {
     }
 
     public void move(String where) {
-
-
-
-
         if (where.equals("east")) {
             if (!cutComplete) {
                 log.slowPrintln("There are branches in the way.");

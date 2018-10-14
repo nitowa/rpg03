@@ -9,8 +9,9 @@ import GameLogic.State.Player;
 import GameLogic.State.State;
 import GameLogic.State.UI.*;
 import myFirstGame.Items.Charcoal;
+import myFirstGame.RoomTemplates.StartingAreaTemplateRoom;
 
-public class G1R1 extends ForestTemplateRoom {
+public class G1R1 extends StartingAreaTemplateRoom {
     public G1R1(int id, Log log, Player player) {
         super(id, log, player, "It appears that someone made camp here not too long ago.\nThere are remains of a fire, and some logs that seem to have been repurposed as chairs.");
     }

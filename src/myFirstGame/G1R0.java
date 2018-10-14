@@ -3,15 +3,13 @@ package myFirstGame;
 import java.util.HashMap;
 import java.util.Map;
 
-import GameLogic.Inventory.BagFullThrowable;
-import GameLogic.Inventory.Items.Item;
 import GameLogic.State.UI.*;
 import GameLogic.State.*;
-import myFirstGame.Items.Charcoal;
 import myFirstGame.Items.HealthPotion;
 import myFirstGame.Items.rottenBranch;
+import myFirstGame.RoomTemplates.StartingAreaTemplateRoom;
 
-public class G1R0 extends ForestTemplateRoom {
+public class G1R0 extends StartingAreaTemplateRoom {
     public G1R0(int id, Log log, Player player) {
         super(id, log, player, "theres not much to see except for a few rocks, and a couple of rotten branches.");
     }

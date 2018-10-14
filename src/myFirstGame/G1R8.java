@@ -11,6 +11,7 @@ import java.util.Map;
 import GameLogic.State.State;
 import GameLogic.State.UI.*;
 import myFirstGame.Items.Plank;
+import myFirstGame.RoomTemplates.ForestTemplateRoom;
 
 
 public class G1R8 extends ForestTemplateRoom {

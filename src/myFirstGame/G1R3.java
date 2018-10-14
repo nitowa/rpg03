@@ -8,8 +8,9 @@ import GameLogic.State.UI.*;
 import GameLogic.State.MapManager;
 import GameLogic.State.Player;
 import myFirstGame.Items.OldHelmet;
+import myFirstGame.RoomTemplates.StartingAreaTemplateRoom;
 
-public class G1R3 extends ForestTemplateRoom {
+public class G1R3 extends StartingAreaTemplateRoom {
     public G1R3(int id, Log log, Player player) {
         super(id, log, player, "It looks like a relatively empty clearing.");
     }

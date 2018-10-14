@@ -6,6 +6,7 @@ import GameLogic.State.MapManager;
 import GameLogic.State.Player;
 import GameLogic.State.State;
 import GameLogic.State.UI.Log;
+import myFirstGame.RoomTemplates.ForestTemplateRoom;
 
 import java.util.HashMap;
 import java.util.Map;

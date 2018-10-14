@@ -8,6 +8,7 @@ import GameLogic.State.State;
 import GameLogic.State.UI.JukeBox;
 import GameLogic.State.UI.Log;
 import myFirstGame.Items.MuddyLegplates;
+import myFirstGame.RoomTemplates.ForestTemplateRoom;
 
 import java.util.HashMap;
 import java.util.Map;
