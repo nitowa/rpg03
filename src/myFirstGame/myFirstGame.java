@@ -40,7 +40,7 @@ public class myFirstGame extends Game {
 //        JukeBox.playMP3Times(JukeBox.WALK, 5);
 
         log.slowPrintln("Test started.");
-        //log.printAscii("cat.jpg");
+        log.printAscii("cat.jpg");
 
         first.enter();
         //printMap(log, first);
