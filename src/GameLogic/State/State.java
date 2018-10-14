@@ -205,7 +205,7 @@ public abstract class State{
                     log.slowPrintColored(getExitTexts(), UIColors.DIRECTIONS);
                 break;
             default:
-                log.slowPrintln("You see nothing of interest. Have you tried searching?");
+                log.slowPrintln("You see your surroundings. To look closer at something, try search!");
         }
     }
 

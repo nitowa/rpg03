@@ -28,17 +28,6 @@ public class G1R9 extends ForestTemplateRoom {
     boolean plankPlaced = false;
 
 
-    @Override
-    public void move(String where) {
-        State next = exits.get(where);
-
-        if(next != null ){
-            JukeBox.playMP3(JukeBox.WALK_WOOD);
-            next.enter();
-            super.move(where);
-        }
-
-    }
 
     public void put(String what) {
         place(what);

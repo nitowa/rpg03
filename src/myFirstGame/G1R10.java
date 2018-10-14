@@ -24,6 +24,12 @@ public class G1R10 extends ForestTemplateRoom {
     }
     boolean legsPulled = false;
 
+    @Override
+    public void onEnter(){
+        JukeBox.playMP3(JukeBox.WALK_WOOD);
+        super.onEnter();
+    }
+
 
     @Override
     public void move(String where) {

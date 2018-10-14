@@ -16,13 +16,30 @@ import myFirstGame.RoomTemplates.ForestTemplateRoom;
 
 public class G1R8 extends ForestTemplateRoom {
     public G1R8(int id, Log log, Player player) {
-        super(id, log, player, "...Where am I?\nNearby lies a small old abandoned hut.");
+        super(id, log, player, "Nearby you can spot a small hut. It looks old and abandoned.");
 
     }
+    @Override
+    public void onEnter(){
+        G1R12 room;
+
+        room = (G1R12)MapManager.getTile(7);
+        if (room.darkForestComplete()){
+
+            exits.put("north",MapManager.getTile(7));
+        }
+        else {
+            log.slowerPrintln("The trees start to shift and move to close the exit behind you.");
+            JukeBox.playMP3Times(JukeBox.MOVINGTREES, 2);
+            log.slowerPrintln("Where am i?...");
+        }
+        super.onEnter();
+    }
+
 
     boolean plankFoundComplete = false;
     boolean plankTakenComplete = false;
-    boolean musicPlaying = false;
+
     @Override
     public void duck(String under) {
 
@@ -68,14 +85,7 @@ public class G1R8 extends ForestTemplateRoom {
         }
     }
 
-    public void playMusic() {
-        if (!musicPlaying) {
-            JukeBox.playMP3(JukeBox.BACKGROUND_WIND);
-            musicPlaying = true;
 
-        }
-
-    }
     @Override
     public void take(String what){
 
@@ -108,7 +118,6 @@ public class G1R8 extends ForestTemplateRoom {
     public Map<String, State> exits() {
         Map<String, State> map = new HashMap<>();
         map.put("east", MapManager.getTile(9));
-        map.put("north", MapManager.getTile(7));
         return map;
 
     }

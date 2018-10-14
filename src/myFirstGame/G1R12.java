@@ -13,12 +13,20 @@ public class G1R12 extends ForestTemplateRoom {
         super(11, log, player, "");
     }
 
+
+
+
+    public boolean darkForestComplete() {  //NEEDS UPDATING WHEN ROOM DONE.
+    return false;
+    }
+
+
 boolean treesMoved = false;
 @Override
     public void look(String where) {
         if (!treesMoved && where != null) {
             treesMoved = true;
-            JukeBox.playMP3(JukeBox.MOVINGTREES);
+            JukeBox.playMP3Times(JukeBox.MOVINGTREES, 2);
             log.slowPrintln("The dark forest starts shifting around you, the trees shrinking and growing.");
             log.slowerPrintln("There is nowhere to go.");
             log.slowerPrintln("In front of you lies a chest.");
