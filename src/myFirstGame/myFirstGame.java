@@ -30,7 +30,6 @@ public class myFirstGame extends Game {
         new G1R9(9, log, player);
         new G1R10(10, log, player);
         new G1R11(11, log, player);
-        new G1R12(12, log, player);
 
         try {
             Thread.sleep(550);

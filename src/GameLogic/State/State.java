@@ -243,9 +243,12 @@ public abstract class State{
     }
 
     public void move(String where) {
-        State next = exits.get(where);
+        System.out.println(getExitTexts());
+        System.out.println(where+" valid exit of "+this.getClass().getSimpleName()+"? "+exits.containsKey(where));
 
-        if(next != null){
+        State next = exits.get(where);
+        System.out.println(this.getClass().getSimpleName()+" -["+where+"]-> "+next.getClass().getSimpleName());
+        if(exits.containsKey(where)){
             JukeBox.playMP3(JukeBox.WALK);
             next.enter();
         }

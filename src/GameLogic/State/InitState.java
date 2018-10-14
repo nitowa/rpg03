@@ -7,8 +7,6 @@ public abstract class InitState extends State {
         super(id, log, player, searchText);
     }
 
-    private boolean inited = false;
-
     protected abstract void onEnter();
 
     @Override

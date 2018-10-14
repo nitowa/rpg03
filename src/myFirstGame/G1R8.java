@@ -21,11 +21,9 @@ public class G1R8 extends ForestTemplateRoom {
     }
     @Override
     public void onEnter(){
-        G1R12 room;
-
-        room = (G1R12)MapManager.getTile(7);
+        G1R11 room;
+        room = (G1R11)MapManager.getTile(11);
         if (room.darkForestComplete()){
-
             exits.put("north",MapManager.getTile(7));
         }
         else {
@@ -33,6 +31,7 @@ public class G1R8 extends ForestTemplateRoom {
             JukeBox.playMP3Times(JukeBox.MOVINGTREES, 2);
             log.slowerPrintln("Where am i?...");
         }
+
         super.onEnter();
     }
 
