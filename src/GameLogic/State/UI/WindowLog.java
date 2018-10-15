@@ -5,6 +5,8 @@ package GameLogic.State.UI;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.io.File;
+import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.StringTokenizer;
 import java.util.concurrent.Semaphore;
@@ -22,19 +24,30 @@ import javax.swing.text.StyleContext;
 import GameLogic.Inventory.Items.Item;
 import GameLogic.State.Unit;
 
+
 public class WindowLog extends Log {
+
+
+    //Edit font here
+    private String fontPath = "/SourceCodePro-Semibold.ttf";
+    private int fontSize = 18;
+
+    //print speeds
+    private int slow = 20;
+    private int slower = 50;
 
     private JTextPane textArea;
     private JScrollPane scp;
     private Semaphore sem = new Semaphore(0);
     private int last = 0;
     private Color fontColor;
-    private NavigationFilterPrefixWithBackspace filter;
     private boolean swallowInputs = false;
     private Caret caret;
     private JFrame win;
     private int backIndex = 0;
     private boolean doBlip = false;
+    private boolean doScroll = true;
+    private String fontName;
 
     public void setScroll(){
                 if(textArea.getCaret().getMark() != textArea.getDocument().getLength()) {
@@ -46,6 +59,18 @@ public class WindowLog extends Log {
     }
 
     public WindowLog(int maxLength, Color background, Color font){
+
+        GraphicsEnvironment ge =
+            GraphicsEnvironment.getLocalGraphicsEnvironment();
+        try {
+            Font f = Font.createFont(Font.TRUETYPE_FONT, WindowLog.class.getResourceAsStream(fontPath));
+            this.fontName = f.getFamily();
+            System.out.println(f);
+            ge.registerFont(f);
+        } catch (FontFormatException | IOException e) {
+            e.printStackTrace();
+        }
+
         this.fontColor = font;
         win = new JFrame();
         win.getContentPane().setBackground( background );
@@ -59,6 +84,7 @@ public class WindowLog extends Log {
         textArea.setCursor(Cursor.getDefaultCursor());
         textArea.setBackground(background);
         textArea.setEditable(false);
+        textArea.setFont(new Font(fontName, Font.PLAIN, fontSize));
 
         textArea.getDocument().addDocumentListener(new DocumentListener() {
             @Override
@@ -71,7 +97,8 @@ public class WindowLog extends Log {
 
             @Override
             public void changedUpdate(DocumentEvent e) {
-                setScroll();
+                if(doScroll)
+                    setScroll();
             }
         });
 
@@ -88,10 +115,12 @@ public class WindowLog extends Log {
                     return;
                 }
 
-                if(e.getExtendedKeyCode() == KeyEvent.VK_RIGHT) {
-                    for(String s : inputLog){
-                        System.out.println(s);
-                    }
+                if(e.getExtendedKeyCode() == KeyEvent.VK_ENTER){
+
+                    sem.release(1);
+                    doScroll = true;
+                    setScroll();
+                    return;
                 }
 
                 if(e.getExtendedKeyCode() == KeyEvent.VK_UP) {
@@ -105,9 +134,9 @@ public class WindowLog extends Log {
                             sc.addAttribute(SimpleAttributeSet.EMPTY, StyleConstants.Foreground,
                                             UIColors.DEFAULT_TEXT_COLOR);
 
-                        aset = sc.addAttribute(aset, StyleConstants.FontFamily, "Lucida Console");
+                        aset = sc.addAttribute(aset, StyleConstants.FontFamily, fontName);
                         aset = sc.addAttribute(aset, StyleConstants.Alignment, StyleConstants.ALIGN_JUSTIFIED);
-                        aset = sc.addAttribute(aset, StyleConstants.Size, 15);
+                        aset = sc.addAttribute(aset, StyleConstants.Size, fontSize);
                         try {
                             textArea.getDocument()
                                 .insertString(textArea.getDocument().getLength(), inputLog.get(inputLog.size()-1-backIndex), aset);
@@ -135,9 +164,9 @@ public class WindowLog extends Log {
                             sc.addAttribute(SimpleAttributeSet.EMPTY, StyleConstants.Foreground,
                                             UIColors.DEFAULT_TEXT_COLOR);
 
-                        aset = sc.addAttribute(aset, StyleConstants.FontFamily, "Lucida Console");
+                        aset = sc.addAttribute(aset, StyleConstants.FontFamily, fontName);
                         aset = sc.addAttribute(aset, StyleConstants.Alignment, StyleConstants.ALIGN_JUSTIFIED);
-                        aset = sc.addAttribute(aset, StyleConstants.Size, 15);
+                        aset = sc.addAttribute(aset, StyleConstants.Size, fontSize);
                         try {
                             textArea.getDocument()
                                 .insertString(textArea.getDocument().getLength(), inputLog.get(inputLog.size()-1-backIndex), aset);
@@ -148,11 +177,11 @@ public class WindowLog extends Log {
                     }
                 }
                 backIndex = 0;
-                if(e.getExtendedKeyCode() == KeyEvent.VK_ENTER){
-                    sem.release(1);
-                    textArea.replaceSelection("\n");
+                if(e.getExtendedKeyCode() == KeyEvent.VK_LEFT){
+                    doScroll = false;
                 }
-                setScroll();
+                if(doScroll)
+                    setScroll();
             }
 
             @Override
@@ -195,15 +224,29 @@ public class WindowLog extends Log {
     }
 
     @Override
-    public void slowPrintColored(String toPrint, Color c) {
+    public void slowerPrintColored(String toPrint, Color c) {
         log.add(toPrint);
-        delayPrintColored(toPrint + "\n", c,20);
+        delayPrintColored(toPrint , c,slower);
         resetFont();
     }
 
-    public void slowerPrintColored(String toPrint, Color c) {
+    @Override
+    public void slowPrintColored(String toPrint, Color c) {
         log.add(toPrint);
-        delayPrintColored(toPrint + "\n", c, 50);
+        delayPrintColored(toPrint , c,slow);
+        resetFont();
+    }
+
+    @Override
+    public void slowPrintlnColored(String toPrint, Color c) {
+        log.add(toPrint);
+        delayPrintColored(toPrint + "\n", c,slow);
+        resetFont();
+    }
+
+    public void slowerPrintlnColored(String toPrint, Color c) {
+        log.add(toPrint);
+        delayPrintColored(toPrint + "\n", c, slower);
         resetFont();
     }
 
@@ -218,13 +261,13 @@ public class WindowLog extends Log {
     }
 
     @Override
-    public void slowPrintItemColored(Item i) {
-        slowerPrintColored(""+i, i.getColor());
+    public void slowPrintlnItemColored(Item i) {
+        slowPrintlnColored("" + i, i.getColor());
     }
 
     @Override
-    public void slowerPrintItemColored(Item i) {
-        slowerPrintColored(""+i, i.getColor());
+    public void slowerPrintlnItemColored(Item i) {
+        slowerPrintlnColored("" + i, i.getColor());
     }
 
     private void blip(char c){
@@ -265,7 +308,7 @@ public class WindowLog extends Log {
                 StyleContext sc = StyleContext.getDefaultStyleContext();
                 AttributeSet aset = sc.addAttribute(SimpleAttributeSet.EMPTY, StyleConstants.Foreground, UIColors.DEFAULT_TEXT_COLOR);
 
-                aset = sc.addAttribute(aset, StyleConstants.FontFamily, "Lucida Console");
+                aset = sc.addAttribute(aset, StyleConstants.FontFamily, fontName);
                 aset = sc.addAttribute(aset, StyleConstants.Alignment, StyleConstants.ALIGN_JUSTIFIED);
                 aset = sc.addAttribute(aset, StyleConstants.Size, fontSize);
 
@@ -286,11 +329,12 @@ public class WindowLog extends Log {
 
     @Override
     public void unitSay(Unit u, String s) {
-        unitSay(u, s, 50);
+        unitSay(u, s, slower);
     }
 
     @Override
     public void unitSay(Unit u, String s, int delay) {
+        delay = delay*2;
         try {
             SwingUtilities.invokeAndWait(()->{
                 setCaretVisible(false);
@@ -310,7 +354,7 @@ public class WindowLog extends Log {
             String word = tokenizer.nextToken()+" ";
             if(word.length() > maxwid) { //the word can never fit
                 maxwid = word.length();
-                content.append(word).append("\n");
+                content.append("\n").append(word).append("\n");
                 height++;
                 currentLineWidth = 0;
                 continue;
@@ -376,7 +420,8 @@ public class WindowLog extends Log {
                 }
                 lineStart++;
                 try {
-                    Thread.sleep(delay);
+                    int speakDelay = (int)((Math.random()*delay));
+                    Thread.sleep(delay-speakDelay);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -418,19 +463,19 @@ public class WindowLog extends Log {
     @Override
     public void slowPrint(String toPrint) {
         log.add(toPrint);
-        delayPrint(toPrint , 20);
+        delayPrint(toPrint , slow);
     }
 
     @Override
     public void slowPrintln(String toPrint) {
         log.add(toPrint);
-        delayPrint(toPrint + "\n", 20);
+        delayPrint(toPrint + "\n", slow);
     }
 
     @Override
     public void slowerPrintln(String toPrint) {
         log.add(toPrint);
-        delayPrint(toPrint + "\n", 50);
+        delayPrint(toPrint + "\n", slower);
     }
 
     @Override
@@ -453,9 +498,9 @@ public class WindowLog extends Log {
                 StyleContext sc = StyleContext.getDefaultStyleContext();
                 AttributeSet aset = sc.addAttribute(SimpleAttributeSet.EMPTY, StyleConstants.Foreground, c);
 
-                aset = sc.addAttribute(aset, StyleConstants.FontFamily, "Lucida Console");
+                aset = sc.addAttribute(aset, StyleConstants.FontFamily, fontName);
                 aset = sc.addAttribute(aset, StyleConstants.Alignment, StyleConstants.ALIGN_JUSTIFIED);
-                aset = sc.addAttribute(aset, StyleConstants.Size, 15);
+                aset = sc.addAttribute(aset, StyleConstants.Size, fontSize);
 
                 int len = textArea.getDocument().getLength();
                 textArea.setCaretPosition(len); //move cursor to end

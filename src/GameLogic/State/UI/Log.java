@@ -31,9 +31,11 @@ public abstract class Log {
     public abstract void printlnColored(String toPrint, Color c);
     public abstract void slowPrintColored(String toPrint, Color c);
     public abstract void slowerPrintColored(String toPrint, Color c);
+    public abstract void slowPrintlnColored(String toPrint, Color c);
     public abstract void printItemColored(Item i);
+    public abstract void slowPrintlnItemColored(Item i);
+    public abstract void slowerPrintlnItemColored(Item i);
     public abstract void printlnItemColored(Item i);
-    public abstract void slowPrintItemColored(Item i);
-    public abstract void slowerPrintItemColored(Item i);
+
     public abstract String read();
 }
