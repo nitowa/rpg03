@@ -1,3 +1,12 @@
+timestamp() {
+  date +"%T"
+}
+
+echo ""
+echo cleaning up git\'s cache
+git rm -r -f  -q --cached .
+echo cleanup OK
+echo ""
 echo adding /src
 git add src
 echo adding /assets
@@ -9,3 +18,12 @@ git add pom.xml
 echo adding ADD
 git add ADD
 echo success
+echo ""
+if [ "$1" != "" ];
+then 
+	echo commiting with -m \"$1\"
+	git commit -m "$1"
+	echo Don\'t forget to push
+else 
+	echo Don\'t forget to commit and push
+fi
