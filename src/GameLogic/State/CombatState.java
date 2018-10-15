@@ -2,7 +2,7 @@ package GameLogic.State;
 
 import GameLogic.State.UI.Log;
 
-public abstract class CombatState extends State {
+public abstract class CombatState extends InitState {
 
     public CombatState(int id, Log log, Player player, String searchText){
         super(id, log, player, searchText);

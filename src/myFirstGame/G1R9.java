@@ -13,19 +13,20 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class G1R9 extends ForestTemplateRoom {
+    private boolean mudSearched= false;
+    private boolean plankPlaced = false;
+
     public G1R9(int id, Log log, Player player) {
         super(id, log, player, "The road ahead is separated by an abyss.");
         try {
             actions.put("put", this.getClass().getMethod("put", String.class));
             actions.put("lay", this.getClass().getMethod("lay", String.class));
             actions.put("place", this.getClass().getMethod("place", String.class));
+            actions.put("jump", this.getClass().getMethod("jump", String.class));
         } catch (NoSuchMethodException e) {
             e.printStackTrace();
         }
     }
-
-    boolean mudSearched= false;
-    boolean plankPlaced = false;
 
     @Override
     public void onEnter(){
@@ -109,12 +110,7 @@ public class G1R9 extends ForestTemplateRoom {
         }
     }
 */
-        @Override
-    public void duck(String under) {
 
-    }
-
-    @Override
     public void jump(String where) {
 
         switch (where) {

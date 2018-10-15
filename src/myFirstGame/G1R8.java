@@ -15,6 +15,11 @@ import myFirstGame.RoomTemplates.ForestTemplateRoom;
 
 
 public class G1R8 extends ForestTemplateRoom {
+
+    private boolean plankFoundComplete = false;
+    private boolean plankTakenComplete = false;
+
+
     public G1R8(int id, Log log, Player player) {
         super(id, log, player, "Nearby you can spot a small hut. It looks old and abandoned.");
 
@@ -41,18 +46,7 @@ public class G1R8 extends ForestTemplateRoom {
     }
 
 
-    boolean plankFoundComplete = false;
-    boolean plankTakenComplete = false;
 
-    @Override
-    public void duck(String under) {
-
-    }
-
-    @Override
-    public void jump(String where) {
-
-    }
     public void look(String where) {
 
         if (!plankFoundComplete && where.equals("")) {
@@ -124,9 +118,6 @@ public class G1R8 extends ForestTemplateRoom {
                 if (plankFoundComplete && !plankTakenComplete) {
                     log.slowPrintln("You take the one plank that has not succumbed to rot.");
                     plankTakenComplete = true;
-                    break; }
-                else {
-                    break;
                 }
 
 
@@ -137,7 +128,8 @@ public class G1R8 extends ForestTemplateRoom {
                 break;
             default: log.slowPrintln("Take what?");
 
-        }super.take(what);
+        }
+        super.take(what);
 
 
     }

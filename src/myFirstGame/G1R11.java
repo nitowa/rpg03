@@ -195,11 +195,6 @@ public class G1R11 extends ForestTemplateRoom {
     }
 
     @Override
-    public void duck(String under) {
-
-    }
-
-    @Override
     public void take(String what) {
 
         switch (what) {
@@ -227,11 +222,6 @@ public class G1R11 extends ForestTemplateRoom {
 
         }
         super.take(what);
-
-    }
-
-    @Override
-    public void jump(String where) {
 
     }
 

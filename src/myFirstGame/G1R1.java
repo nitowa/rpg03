@@ -17,16 +17,6 @@ public class G1R1 extends StartingAreaTemplateRoom {
     }
 
     @Override
-    public void duck(String under) {
-
-    }
-
-    @Override
-    public void jump(String where) {
-
-    }
-
-    @Override
     public void look (String where) {
     switch (where) {
         case "camp":

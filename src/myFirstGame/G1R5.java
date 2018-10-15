@@ -31,15 +31,7 @@ public class G1R5 extends StartingAreaTemplateRoom {
 
     boolean cutComplete = false;
 
-    @Override
-    public void duck(String under) {
 
-    }
-
-    @Override
-    public void jump(String where) {
-
-    }
 
     @Override
     public void onEnter(){

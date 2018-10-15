@@ -47,11 +47,6 @@ public class G1R10 extends ForestTemplateRoom {
     }
 
 
-    @Override
-    public void duck(String under) {
-
-    }
-
   /*  public void pull(String what) {
         switch (what) {
             case "legs":
@@ -80,7 +75,6 @@ public class G1R10 extends ForestTemplateRoom {
 
     }
 */
-    @Override
     public void jump(String where) {
 
         switch (where) {

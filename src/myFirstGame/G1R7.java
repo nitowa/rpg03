@@ -13,11 +13,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class G1R7 extends ForestTemplateRoom {
+    private int roomsLooped = 0;
+
     public G1R7(int id, Log log, Player player) {
         super(id, log, player, "The dark forest splits up in every direction. You can feel the temperature slowly dropping.");
     }
 
-int roomsLooped = 0;
     @Override
     public void onEnter(){
         if (roomsLooped < 7) {
@@ -56,16 +57,6 @@ int roomsLooped = 0;
         }
 
         super.onEnter();
-    }
-
-    @Override
-    public void duck(String under) {
-
-    }
-
-    @Override
-    public void jump(String where) {
-
     }
 
     @Override

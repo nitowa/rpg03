@@ -15,16 +15,8 @@ public class G1R3 extends StartingAreaTemplateRoom {
         super(id, log, player, "It looks like a relatively empty clearing.");
     }
 
-boolean helmetSpawned = false;
-    @Override
-    public void duck(String under) {
+    private boolean helmetSpawned = false;
 
-    }
-
-    @Override
-    public void jump(String where) {
-
-    }
 
     @Override
     public void take(String what){

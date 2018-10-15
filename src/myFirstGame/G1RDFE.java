@@ -42,15 +42,6 @@ public class G1RDFE extends ForestTemplateRoom {
          super.take(what);
 
     }
-    @Override
-    public void duck(String under) {
-
-    }
-
-    @Override
-    public void jump(String where) {
-
-    }
 
     @Override
     public void search(String what) {

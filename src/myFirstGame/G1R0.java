@@ -15,18 +15,8 @@ public class G1R0 extends StartingAreaTemplateRoom {
         super(id, log, player, "theres not much to see except for a few rocks, and a couple of rotten branches.");
     }
 
-    boolean PotionFoundComplete = false;
-    boolean branchFoundComplete = false;
-
-    @Override
-    public void duck(String under) {
-
-    }
-
-    @Override
-    public void jump(String where) {
-
-    }
+    private boolean PotionFoundComplete = false;
+    private boolean branchFoundComplete = false;
 
     @Override
     public void look(String where) {

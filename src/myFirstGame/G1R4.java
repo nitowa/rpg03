@@ -15,16 +15,16 @@ import myFirstGame.RoomTemplates.StartingAreaTemplateRoom;
 public class G1R4 extends StartingAreaTemplateRoom {
     public G1R4(int id, Log log, Player player) {
         super(id, log, player, "Watch your step. Blocking the path is a big hole.");
+        try {
+            actions.put("jump", this.getClass().getMethod("jump", String.class));
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        }
+
     }
 
-    boolean riddle1Complete = false;
+    private boolean riddle1Complete = false;
 
-    @Override
-    public void duck(String under) {
-
-    }
-
-    @Override
     public void jump(String where) {
         switch (where) {
 

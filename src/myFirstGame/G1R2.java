@@ -46,17 +46,8 @@ public class G1R2 extends CombatState {
                 super.look(where);
         }
     }
-    @Override
-    public void duck(String under) {
 
-    }
-
-    @Override
-    public void jump(String where) {
-
-    }
-    @Override
-    public void roomEnterLogic() {
+    public void onEnter() {
         if(!troggRan) {
             log.slowerPrintln("You take a step forward and see a Forest Trogg walking by. \nYou try to not make noise, but the Trogg sees you and attacks.");
 
