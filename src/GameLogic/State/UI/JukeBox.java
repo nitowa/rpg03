@@ -28,9 +28,12 @@ public class JukeBox extends JFXPanel {
     public static final String WALK_WOOD    = "assets/walkWood.mp3";
     public static final String WOODCRACK    = "assets/woodCrack.mp3";
     public static final String MOVINGTREES  = "assets/movingTrees.mp3";
+    public static final String PICKUP_EPIC= "assets/epicPickUp.mp3";
+    public static final String WALK_DIZZY= "assets/dizzyWalk.mp3";
 
     //atmosphere tracks.
     public static final String BACKGROUND_WIND= "assets/wind.mp3";
+    public static final String TENSION= "assets/tension.mp3";
 
 
     private static Map<String, MediaPlayer> looping = new HashMap<>();

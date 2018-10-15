@@ -16,13 +16,9 @@ import java.util.Map;
 public class G1R10 extends ForestTemplateRoom {
     public G1R10(int id, Log log, Player player) {
         super(id, log, player, "You are not sure how long this plank is gonna hold. Maybe you should keep walking.");
-        try {
-            actions.put("pull", this.getClass().getMethod("pull", String.class));
-        } catch (NoSuchMethodException e) {
-            e.printStackTrace();
-        }
+
     }
-    boolean legsPulled = false;
+
 
     @Override
     public void onEnter(){
@@ -43,7 +39,7 @@ public class G1R10 extends ForestTemplateRoom {
 
         if (!exits.containsKey(where)) {
             if (where.equals("east")) {
-                log.slowPrintln("There is a pool of mud in the way.");
+                log.slowPrintln("There is an abyss in the way.");
                 return;
             }
         }
@@ -56,7 +52,7 @@ public class G1R10 extends ForestTemplateRoom {
 
     }
 
-    public void pull(String what) {
+  /*  public void pull(String what) {
         switch (what) {
             case "legs":
             case "legplates":
@@ -83,7 +79,7 @@ public class G1R10 extends ForestTemplateRoom {
         }
 
     }
-
+*/
     @Override
     public void jump(String where) {
 
@@ -97,11 +93,16 @@ public class G1R10 extends ForestTemplateRoom {
     public void search(String what) {
 
         switch (what) {
+            /*
             case "legs":
             case "legplates":
             case "leg armor":
-                log.slowPrintln("They're right under you now.\nMaybe if i pull real hard....");
+                log.slowPrintln("The legplates are stuck in the mud under you.\nMaybe if i pull real hard....");
                 break;
+          */
+            case "abyss":
+            case "hole":
+                log.slowPrintln("Don't fall in.");
             default:
                 log.slowPrintln("Search what?");
         }
@@ -110,11 +111,11 @@ public class G1R10 extends ForestTemplateRoom {
         public void take(String what) {
 
             switch (what) {
-                case "legs":
+                /* case "legs":
                 case "legplates":
                 case "leg armor":
                     log.slowPrintln("They wouldn't come loose with just a grab.");
-                    break;
+                    break; */
                 case "plank":
                     log.slowPrintln("I would'nt do that if I wanted to live.");
                     break;

@@ -192,7 +192,7 @@ public abstract class State{
 
     public void look(String at){
 
-        switch (at){
+        switch (at) {
             case "inventory":
                 player.getInventory().listItems();
                 break;
@@ -201,11 +201,9 @@ public abstract class State{
                 break;
             case "":
                 log.slowPrintln(searchText);
-                if(exits != null && exits.size() > 0)
+                if (exits != null && exits.size() > 0)
                     log.slowPrintColored(getExitTexts(), UIColors.DIRECTIONS);
                 break;
-            default:
-                log.slowPrintln("You see your surroundings. To look closer at something, try search!");
         }
     }
 

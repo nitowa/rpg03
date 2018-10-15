@@ -64,12 +64,12 @@ public class G1R5 extends StartingAreaTemplateRoom {
             case "branches":
                 JukeBox.playMP3(JukeBox.SWORDHIT);
                 JukeBox.playMP3(JukeBox.WOODCRACK);
-                log.slowerPrintln("Your sword cuts through the branches. They crack loudly and fall to the ground.\nA cold chill passes through the hole you made. You can now move further.");
+                log.slowerPrintln("Your sword cuts through the branches. They crack loudly and fall to the ground.");
+                JukeBox.playMP3(JukeBox.BACKGROUND_WIND, true);
+                log.slowerPrintln("A cold chill passes through the hole you made. You can now move further.");
                 searchText= "You see an old murk-rotten sign and an entrance to the Dark Forest that you made.";
 
-                JukeBox.playMP3(JukeBox.BACKGROUND_WIND, true);
-
-               exits.put("east", MapManager.getTile(6));
+               exits.put("hole", MapManager.getTile(6));
                 cutComplete=true;
                 break;
             case "half-rotten sign":
@@ -132,7 +132,7 @@ public class G1R5 extends StartingAreaTemplateRoom {
     }
 
     public void move(String where) {
-        if (where.equals("east")) {
+        if (where.equals("hole") || (where.equals("east"))) {
             if (!cutComplete) {
                 log.slowPrintln("There are branches in the way.");
             }

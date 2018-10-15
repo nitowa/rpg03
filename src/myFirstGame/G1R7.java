@@ -5,6 +5,7 @@ package myFirstGame;
 import GameLogic.State.MapManager;
 import GameLogic.State.Player;
 import GameLogic.State.State;
+import GameLogic.State.UI.JukeBox;
 import GameLogic.State.UI.Log;
 import myFirstGame.RoomTemplates.ForestTemplateRoom;
 
@@ -13,33 +14,37 @@ import java.util.Map;
 
 public class G1R7 extends ForestTemplateRoom {
     public G1R7(int id, Log log, Player player) {
-        super(id, log, player, "The dark forest splits up in every direction. It's constantly getting colder.");
+        super(id, log, player, "The dark forest splits up in every direction. You can feel the temperature slowly dropping.");
     }
 
 int roomsLooped = 0;
     @Override
     public void onEnter(){
-        if (roomsLooped < 7 ) {
+        if (roomsLooped < 7) {
+            JukeBox.playMP3(JukeBox.WALK_DIZZY);
             if (roomsLooped !=0){
                 switch (roomsLooped) {
                     case 1:
-                        log.slowerPrintln("The forest splits up..again?");
+                        log.slowerPrintln("You end up at a very similar crossroads to the one you just passed.");
                         break;
                     case 2:
-                        log.slowerPrintln("..Have I not been here before?");
+                        log.slowerPrintln("..Have you not been here before?");
                         break;
                     case 3:
-                        log.slowerPrintln("..I'm sure I was just here.");
+                        log.slowerPrintln("..You're sure you were just here.");
                         break;
                     case 5:
                         log.slowerPrintln("..What is going on?");
                         break;
                     case 4:
-                        log.slowerPrintln("You start to feel dizzy.");
+                        log.slowerPrintln("The wind is almost unbearable.");
                         break;
                     case 6:
-                        log.slowerPrintln("You feel the temperature start to go back to normal.");
+                        log.slowerPrintln("You start to feel dizzy.");
                         break;
+                    default :
+                        log.slowerPrintln("For some reason the wind starts to subside. You feel the temperature start to go back to normal.\nWhat just happened?");
+
                 }
             }
             roomsLooped++;

@@ -17,14 +17,14 @@ public class myFirstGame extends Game {
         Inventory inventory = new Inventory(log, 10);
         Player player = new rpgPlayer("Player", 10,0,1, inventory, log);
 
-        new G1R0(0, log, player);
+        State first =      new G1R0(0, log, player);
         new RockyRoom(-1, log, player);
         new G1R1(1, log, player);
         new G1R2(2, log, player);
         new G1R3(3, log, player);
         new G1R4(4, log, player);
         new G1R5(5, log, player);
-        State first =  new G1RDFE(6,log,player);
+        new G1RDFE(6,log,player);
         new G1R7(7, log, player);
         new G1R8(8, log, player);
         new G1R9(9, log, player);

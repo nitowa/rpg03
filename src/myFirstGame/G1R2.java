@@ -3,20 +3,49 @@ package myFirstGame;
 
 import GameLogic.State.*;
 import GameLogic.State.UI.Log;
+import myFirstGame.Items.OldHelmet;
+import myFirstGame.Items.WoodenClub;
+
 import java.util.HashMap;
 import java.util.Map;
 
 
 public class G1R2 extends CombatState {
     private boolean troggRan = false;
-
+    private boolean helmetSpawned = false;
     private YoungTrogg YoungTrogg = new YoungTrogg(player,log);
 
     public G1R2(int id, Log log, Player player) {
-        super(id, log, player, "Your path is blocked by a Trogg that is carrying\nwhat appears to be a satchel full of helmets.");
+        super(id, log, player, "Your path is blocked by a Forest Trogg!");
 
     }
 
+    @Override
+    public void look(String where) {
+
+        switch (where) {
+
+            case "helm":
+            case "helmet":
+                log.slowPrintln("It looks like a helmet is a Forest Troggs go-to attire.");
+                break;
+            case "trogg":
+                if (!troggRan) {
+                    log.slowPrintln("A small, but albeit very angry Forest Trogg.");
+                }
+                break;
+            case "forest":
+            case "ground":
+            case "floor":
+            case "forest floor":
+
+                if (troggRan) {
+                    log.slowPrintln("The forest floor has been slightly disturbed by the event. The Troggs club and helmet lie on the ground.");
+                    break;
+                }
+                super.look(where);
+        }
+    }
     @Override
     public void duck(String under) {
 
@@ -29,7 +58,7 @@ public class G1R2 extends CombatState {
     @Override
     public void roomEnterLogic() {
         if(!troggRan) {
-            log.slowerPrintln("You take a step forward and see a trogg walking by. \nYou try to not make noise, but the trogg sees you and attacks.");
+            log.slowerPrintln("You take a step forward and see a Forest Trogg walking by. \nYou try to not make noise, but the Trogg sees you and attacks.");
 
             try {
                 while (!troggRan) {
@@ -41,33 +70,33 @@ public class G1R2 extends CombatState {
             }
         }
 
-
     }
-
 
     @Override
     public void search(String what) {
 
         switch (what){
-            case "satchel":
-            case "satchel of helmets":
+
             case "helm" :
-                log.slowPrintln("The Trogg does NOT like that.");
-                break;
-
             case "helmet" :
-                log.slowPrintln("The Trogg does NOT like that.");
-                break;
-
+                if(troggRan) {
+                    log.slowPrintln("A very worn old helmet. It smells rather bad.");
+                }
+                else {
+                    log.slowPrintln("The Trogg does NOT like that.");
+                    break;
+                }
             case "trogg":
                 if(!troggRan) {
-                    log.slowPrintln("A trogg. He appears to collect helms. Maybe he's looking for one that fits. \nThe one on his head is definitely too big.");
+                    log.slowPrintln("the Trogg does NOT like that.");
                     }
                     break;
-
             case "forest":
+            case "ground":
+            case "floor":
+            case "forest floor":
                 if(troggRan){
-                    log.slowPrintln("The forest floor is slightly disturbed by the event.");
+                    log.slowPrintln("The forest floor is slightly disturbed by the event. The Troggs club and helmet lie on the ground.");
                     break;
                 }
             default:
@@ -87,22 +116,34 @@ public class G1R2 extends CombatState {
         switch (what) {
             case ("helm"):
             case ("helmet"):
+                what = "old helmet";
+                if (!troggRan && !YoungTrogg.getHelmetoff()) {
+                    log.slowPrintln("That helm is not coming off with such gentle measures.");
 
-                log.slowPrintln("That helm is not coming off with such gentle measures.");
+                }
                 break;
-            default:
-                super.take(what);
-        }
-
-
+            case "club":
+            case "wooden club":
+            case "wood club":
+                what = "wooden club";
+           break;
+        }super.take(what);
     }
 
     @Override
     public void attack(String who) {
+
+        if (who.equals("helm") || who.equals("head") || who.equals("helmet")) {
+            if (!helmetSpawned) {
+                addTakeable(new OldHelmet());
+                helmetSpawned = true;
+            }
+        }
         try {
             YoungTrogg.takeDamage(player.calculateDamageDealt(), who);
 
         } catch (YouDied youDied) {
+            addTakeable(new WoodenClub());
             searchText = "With the Trogg gone, the forest definitely smells better.";
             exits.put("west", MapManager.getTile(21));
             exits.put("south", MapManager.getTile(1));

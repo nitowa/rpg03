@@ -14,7 +14,7 @@ import java.util.Map;
 
 public class G1R9 extends ForestTemplateRoom {
     public G1R9(int id, Log log, Player player) {
-        super(id, log, player, "The road ahead is engulfed in a pool of mud.");
+        super(id, log, player, "The road ahead is separated by an abyss.");
         try {
             actions.put("put", this.getClass().getMethod("put", String.class));
             actions.put("lay", this.getClass().getMethod("lay", String.class));
@@ -27,9 +27,16 @@ public class G1R9 extends ForestTemplateRoom {
     boolean mudSearched= false;
     boolean plankPlaced = false;
 
-
+    @Override
+    public void onEnter(){
+        log.slowerPrintln("The trees start to shift and move. You stand back as the large branches pull the ground before you apart, leaving a gaping abyss.");
+        JukeBox.playMP3Times(JukeBox.MOVINGTREES, 2);
+        super.onEnter();
+    }
 
     public void put(String what) {
+
+
         place(what);
     }
 
@@ -38,17 +45,18 @@ public class G1R9 extends ForestTemplateRoom {
         System.out.println(what);
 
         switch (what) {
-
-            case "plank on mud":
-            case "plank on pool":
-            case "plank on pool of mud":
+            case "plank hole":
+            case "plank over hole":
+            case "plank on hole":
+            case "plank on abyss":
+            case "plank over abyss":
             case "plank":
                 Item item = player.getInventory().getItemByIndexOrName("plank");
 
                 System.out.println(what);
                 if (!plankPlaced && (item instanceof Plank)) {
-                    log.slowPrintln("You place the plank over the pool of mud. Lets hope it holds.");
-                    searchText="The road ahead is engulfed in a pool of mud. Your plank is holding up, but it's definitely uncertain for how long.";
+                    log.slowPrintln("You place the plank over the abyss. Lets hope it holds.");
+                    searchText="The road ahead is separated by an abyss. Your plank is acting as a very unstable bridge.";
                     if(item != null){
                         JukeBox.playMP3(JukeBox.DROP);
                         player.getInventory().silentRemove(item);
@@ -68,18 +76,23 @@ public class G1R9 extends ForestTemplateRoom {
 
     @Override
     public void use (String what) {
+        place(what);
 
-        switch (what) {
-            case "plank":
-                log.slowPrintln("And do what?");
-                break;
-            default: log.slowPrintln("Use what?");
+    }
+    @Override
+    public void look (String where) {
+    switch (where) {
+
+        case "hole":
+        case "abyss":
+            log.slowPrintln("Don't fall in.");
         }
+        super.look(where);
 
     }
 
 
-    @Override
+  /*  @Override
     public void take(String what) {
 
         switch (what) {
@@ -95,7 +108,7 @@ public class G1R9 extends ForestTemplateRoom {
                 log.slowPrintln("Take what?");
         }
     }
-
+*/
         @Override
     public void duck(String under) {
 
@@ -105,13 +118,9 @@ public class G1R9 extends ForestTemplateRoom {
     public void jump(String where) {
 
         switch (where) {
-            case "mud":
-            case "pool":
-            case "pool of mud":
+            case "hole":
+            case "abyss":
                 log.slowPrintln("The distance is just a bit longer than you've ever jumped before, and you get cold feet.");
-                break;
-            case "legplates":
-                log.slowPrintln("You could probably land on the legplates from here, but undoubtedly they would sink.");
                 break;
             default:
                 log.slowPrintln("Jump what?");
@@ -123,31 +132,18 @@ public class G1R9 extends ForestTemplateRoom {
     public void search(String what) {
 
         switch (what) {
-            case "pool":
-            case "mud":
-                if (!mudSearched) {
-                    log.slowPrintln("You spot pair of legplates in the center of the pool. They appear to be slowly sinking.\nThey should soon reach the sunken fate that their previous wearer presumably suffered.");
-                    mudSearched = true;
-                    break;
-                }
-                else {
-                    log.slowPrintln("Don't fall in. Or you will have to choose between your leg armor and your life.");
-                    break;
-                }
-            case "legplates":
-            case "legs":
-            case "leg armor":
-                log.slowPrintln("They're too far away to search.");
+            case "hole":
+            case "abyss":
+                log.slowPrintln("Don't fall in.");
                 break;
         }
-
     }
 
 
     @Override
     public Map<String, State> exits() {
         Map<String, State> map = new HashMap<>();
-        map.put("north", MapManager.getTile(8));
+        map.put("west", MapManager.getTile(8));
         return map;
     }
 }
