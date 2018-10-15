@@ -23,7 +23,11 @@ if [ "$1" != "" ];
 then 
 	echo commiting with -m \"$1\"
 	git commit -m "$1"
+	echo ""
 	echo Don\'t forget to push
+	echo ""
 else 
+	echo ""
 	echo Don\'t forget to commit and push
+	echo ""
 fi
