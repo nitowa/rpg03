@@ -36,6 +36,6 @@ public abstract class Log {
     public abstract void slowPrintlnItemColored(Item i);
     public abstract void slowerPrintlnItemColored(Item i);
     public abstract void printlnItemColored(Item i);
-
+    public abstract void colorLastInput(Color c);
     public abstract String read();
 }

@@ -17,6 +17,7 @@ import javax.swing.event.DocumentListener;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.Caret;
+import javax.swing.text.NavigationFilter;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyleContext;
@@ -50,11 +51,11 @@ public class WindowLog extends Log {
     private String fontName;
 
     public void setScroll(){
-                if(textArea.getCaret().getMark() != textArea.getDocument().getLength()) {
-                    textArea.setCaretPosition(textArea.getDocument().getLength());
-                }
-                //if(scp.getHAdjustable().getValue() < scp.getHAdjustable().getMaximum())
-                //    scp.setScrollPosition(0, scp.getVAdjustable().getMaximum());
+        if(textArea.getCaret().getMark() != textArea.getDocument().getLength()) {
+            textArea.setCaretPosition(textArea.getDocument().getLength());
+        }
+        //if(scp.getHAdjustable().getValue() < scp.getHAdjustable().getMaximum())
+        //    scp.setScrollPosition(0, scp.getVAdjustable().getMaximum());
 
     }
 
@@ -257,17 +258,43 @@ public class WindowLog extends Log {
 
     @Override
     public void printlnItemColored(Item i) {
-        printlnColored(""+i, i.getColor());
+        printlnColored(""+i,i.getColor());
+    }
+
+    @Override
+    public void colorLastInput(Color c) {
+        try {
+            SwingUtilities.invokeAndWait(()->{
+                setScroll();
+                setCaretVisible(true);
+                String last = inputLog.get(inputLog.size()-1);
+                int offset = textArea.getText().lastIndexOf(last);
+                NavigationFilter nf = textArea.getNavigationFilter();
+                textArea.setNavigationFilter(null);
+                textArea.setEditable(true);
+                System.out.println("last "+last);
+                System.out.println("ss   "+textArea.getText().substring(offset, offset+last.length()));
+                textArea.select(offset, textArea.getDocument().getLength());
+                System.out.println("sele  "+textArea.getSelectedText());
+                textArea.setSelectionColor(c);
+                textArea.setNavigationFilter(nf);
+                textArea.setEditable(false);
+            });
+        } catch (InterruptedException | InvocationTargetException e) {
+            e.printStackTrace();
+        }
+        resetFont();
+
     }
 
     @Override
     public void slowPrintlnItemColored(Item i) {
-        slowPrintlnColored("" + i, i.getColor());
+        slowPrintlnColored(""+i, i.getColor());
     }
 
     @Override
     public void slowerPrintlnItemColored(Item i) {
-        slowerPrintlnColored("" + i, i.getColor());
+        slowerPrintlnColored("" + i+"\n", i.getColor());
     }
 
     private void blip(char c){
@@ -302,28 +329,28 @@ public class WindowLog extends Log {
     @Override
     public void printSize(String msg, int fontSize) {
 
-                textArea.setEditable(true);
-                swallowInputs = false;
+        textArea.setEditable(true);
+        swallowInputs = false;
 
-                StyleContext sc = StyleContext.getDefaultStyleContext();
-                AttributeSet aset = sc.addAttribute(SimpleAttributeSet.EMPTY, StyleConstants.Foreground, UIColors.DEFAULT_TEXT_COLOR);
+        StyleContext sc = StyleContext.getDefaultStyleContext();
+        AttributeSet aset = sc.addAttribute(SimpleAttributeSet.EMPTY, StyleConstants.Foreground, UIColors.DEFAULT_TEXT_COLOR);
 
-                aset = sc.addAttribute(aset, StyleConstants.FontFamily, fontName);
-                aset = sc.addAttribute(aset, StyleConstants.Alignment, StyleConstants.ALIGN_JUSTIFIED);
-                aset = sc.addAttribute(aset, StyleConstants.Size, fontSize);
+        aset = sc.addAttribute(aset, StyleConstants.FontFamily, fontName);
+        aset = sc.addAttribute(aset, StyleConstants.Alignment, StyleConstants.ALIGN_JUSTIFIED);
+        aset = sc.addAttribute(aset, StyleConstants.Size, fontSize);
 
-                int len = textArea.getDocument().getLength();
-                textArea.setCaretPosition(len); //move cursor to end
-                textArea.setCharacterAttributes(aset, false); //set color
-                textArea.replaceSelection(msg); //insert text
-                setScroll();
-                textArea.setEditable(false);
-                swallowInputs = true;
+        int len = textArea.getDocument().getLength();
+        textArea.setCaretPosition(len); //move cursor to end
+        textArea.setCharacterAttributes(aset, false); //set color
+        textArea.replaceSelection(msg); //insert text
+        setScroll();
+        textArea.setEditable(false);
+        swallowInputs = true;
 
-                len += msg.length();
-                last = len;
-                textArea.setNavigationFilter( new NavigationFilterPrefixWithBackspace(last, textArea) );
-                resetFont();
+        len += msg.length();
+        last = len;
+        textArea.setNavigationFilter( new NavigationFilterPrefixWithBackspace(last, textArea) );
+        resetFont();
 
     }
 
@@ -554,12 +581,13 @@ public class WindowLog extends Log {
         try {
             ret = textArea.getDocument().getText(0, textArea.getDocument().getLength()).substring(last).trim();
             if(!ret.equals(""))
-               this.inputLog.add(ret);
+                this.inputLog.add(ret);
 
         } catch (BadLocationException e) {
             e.printStackTrace();
         }
 
+        log.add(ret);
         return ret;
     }
 

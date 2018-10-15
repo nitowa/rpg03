@@ -1,6 +1,5 @@
 package GameLogic.State;
 
-import java.awt.*;
 import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
@@ -243,9 +242,8 @@ public abstract class State{
     }
 
     public void move(String where) {
-        System.out.println(getExitTexts());
         System.out.println(where+" valid exit of "+this.getClass().getSimpleName()+"? "+exits.containsKey(where));
-
+        log.colorLastInput(UIColors.DIRECTIONS);
         State next = exits.get(where);
         System.out.println(this.getClass().getSimpleName()+" -["+where+"]-> "+next.getClass().getSimpleName());
         if(exits.containsKey(where)){

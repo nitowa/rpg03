@@ -1,5 +1,7 @@
 package myFirstGame;
 
+import java.awt.*;
+
 import GameLogic.Game;
 import GameLogic.Inventory.Inventory;
 
@@ -31,13 +33,7 @@ public class myFirstGame extends Game {
         new G1R10(10, log, player);
         new G1R11(11, log, player);
 
-        try {
-            Thread.sleep(550);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-//        JukeBox.playMP3Times(JukeBox.WALK, 5);
+        //        JukeBox.playMP3Times(JukeBox.WALK, 5);
 
         log.slowPrintln("Test started.");
         log.printAscii("/cat.jpg");
