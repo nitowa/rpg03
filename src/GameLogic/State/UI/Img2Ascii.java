@@ -16,7 +16,7 @@ public class Img2Ascii {
 
     public String convertToAscii(String imgname) {
         try {
-            img = ImageIO.read(new File(imgname));
+            img = ImageIO.read(Img2Ascii.class.getResourceAsStream(imgname));
         } catch (IOException e) {
             e.printStackTrace();
         }
