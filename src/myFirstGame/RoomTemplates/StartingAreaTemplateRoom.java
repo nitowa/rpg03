@@ -13,6 +13,7 @@ public abstract class StartingAreaTemplateRoom extends InitState {
 
     @Override
     public void onEnter(){
-        JukeBox.stopLoop();
+        JukeBox.stopAllLoopsExcept(JukeBox.BACKGROUND_FOREST);
+        JukeBox.playMP3(JukeBox.BACKGROUND_FOREST, true);
     }
 }

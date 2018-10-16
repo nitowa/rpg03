@@ -34,7 +34,7 @@ public class JukeBox extends JFXPanel {
     //atmosphere tracks.
     public static final String BACKGROUND_WIND= "assets/wind.mp3";
     public static final String TENSION= "assets/tension.mp3";
-
+    public static final String BACKGROUND_FOREST = "assets/Forest.mp3";
 
     private static Map<String, MediaPlayer> looping = new HashMap<>();
 

@@ -1,4 +1,9 @@
 package GameLogic.Inventory.Items;
 
-public class GlovesArmor {
+import java.awt.*;
+
+public class GlovesArmor extends Armor {
+    public GlovesArmor(String name, String description, int armorValue, Color c) {
+        super(name, description, armorValue, c);
+    }
 }

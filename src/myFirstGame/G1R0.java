@@ -31,7 +31,7 @@ public class G1R0 extends StartingAreaTemplateRoom {
             case "rotten branches":
             case "branch":
             case "branches":
-                log.slowPrintln("Some rotten branches.");
+                log.slowPrintln("Some dead branches.");
                 break;
             case "rock":
             case "rocks":
@@ -48,7 +48,7 @@ public class G1R0 extends StartingAreaTemplateRoom {
             case "rotten branches":
             case "branch":
             case "branches":
-                log.slowPrintln("They almost fall apart as you search them.");
+                log.slowPrintln("The branches almost fall apart as you search them. They appear to just be dead pieces of wood.");
                 break;
             case "rock":
             case "rocks":

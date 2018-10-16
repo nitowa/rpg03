@@ -7,73 +7,90 @@ import GameLogic.State.State;
 import GameLogic.State.UI.*;
 import GameLogic.State.MapManager;
 import GameLogic.State.Player;
+import myFirstGame.Items.EmptyVial;
+import myFirstGame.Items.LeatherBoots;
 import myFirstGame.Items.OldHelmet;
 import myFirstGame.RoomTemplates.StartingAreaTemplateRoom;
 
 public class G1R3 extends StartingAreaTemplateRoom {
     public G1R3(int id, Log log, Player player) {
-        super(id, log, player, "It looks like a relatively empty clearing.");
+        super(id, log, player, "It looks like a clearing in the forest. On the ground you see two corpses.");
     }
 
-    private boolean helmetSpawned = false;
+    private boolean vialsSpawned = false;
+    private boolean bootsSpawned = false;
 
+    @Override
+    public void onEnter() {
+        if (!vialsSpawned) {
+
+            addTakeable(new EmptyVial());
+            addTakeable(new EmptyVial());
+            vialsSpawned = true;
+        }
+        if (!bootsSpawned) {
+            addTakeable(new LeatherBoots());
+            bootsSpawned = true;
+        }
+     super.onEnter();
+    }
 
     @Override
     public void take(String what){
 
         switch (what) {
-            case ("helm"):
+            case "corpse":
+            case "corpses":
+            case "bodies":
+            case "body":
+                log.slowPrintln("Definitely not.");
+                break;
 
-                what = "old helmet";
-
-            case ("helmet"):
-
-                what = "old helmet";
+            case "vials":
+            case "empty vials":
+            case "vial":
+            case "empty vial":
+                what = "empty vial";
+                break;
+            case "boots":
+            case "leather boots":
+            case "shoes":
+            case "leather shoes":
+                what = "leather boots";
+                break;
             default:
                 super.take(what);
-        }
 
+        }
+        super.take(what);
 
     }
     public void look(String where) {
 
-        if (!helmetSpawned && where.equals("")) {
-            addTakeable(new OldHelmet());
-            helmetSpawned = true;
-        } super.look(where);
+        switch (where) {
+            case "corpse":
+            case "corpses":
+            case "bodies":
+            case "body":
+        log.slowPrintln("The bodies seem to have been dragged and pillaged.");
+        break;
+            case "clearing":
+            case "beautiful clearing":
+                log.slowPrintln("A beautiful clearing.");
+                break;
+      }  super.look(where);
 
     }
 
     @Override
     public void search(String what) {
         switch (what) {
-
-
-            case "empty clearing":
-                log.slowPrintln("Indeed, an empty clearing. . . . \nBut upon further inspection, you notice someone has dropped an old helmet.");
-                if (!helmetSpawned) {
-                addTakeable(new OldHelmet());
-                helmetSpawned = true;
-                }
-                break;
-            case "clearing":
-                log.slowPrintln("Indeed, an empty clearing. . . . \nBut upon further inspection, you notice someone has dropped an old helmet.");
-                if (!helmetSpawned) {
-                    addTakeable(new OldHelmet());
-                    helmetSpawned = true;
-                }
-                break;
-            case "helmet":
-                log.slowPrintln("A helmet that appears to have been dropped recently.");
-
-                break;
-            case "helm":
-                log.slowPrintln("A helmet that appears to have been dropped recently.");
-
-                break;
-            default:
-                log.slowPrintln("You find nothing.");
-
+                case "corpse":
+                case "corpses":
+                case "bodies":
+                case "body":
+                    log.slowPrintln("You find a few empty vials firmly gripped in the hands of the bodies. One body is wearing some leather boots.");
+                    break;
         }
 
     }

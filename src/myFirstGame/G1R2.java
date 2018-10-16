@@ -48,7 +48,7 @@ public class G1R2 extends CombatState {
     @Override
     public void roomEnterLogic() {
         if(!troggRan) {
-            log.slowerPrintln("You take a step forward and see a Forest Trogg walking by. \nYou try to not make noise, but the Trogg sees you and attacks.");
+            log.slowerPrintln("You take a step forward and see a Forest Trogg walking by. You try to not make noise, but the Trogg sees you and attacks.");
 
             try {
                 while (!troggRan) {

@@ -1,4 +1,12 @@
 package myFirstGame.Items;
 
-public class EmptyVial {
+import GameLogic.Inventory.Items.Item;
+import GameLogic.State.UI.UIColors;
+
+import java.awt.*;
+
+public class EmptyVial extends Item {
+    public EmptyVial() {
+        super("Empty Vial", "A relatively clean empty vial.", UIColors.DEFAULT_TEXT_COLOR);
+    }
 }

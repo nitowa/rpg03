@@ -17,6 +17,7 @@ public class YoungTrogg extends Enemy {
 
 
     boolean troggDead = false;
+    boolean notfirstLine = false;
 
     public boolean getHelmetoff() {
         return helmetOff;
@@ -30,10 +31,20 @@ public class YoungTrogg extends Enemy {
     @Override
     protected void performAction(Unit target) throws YouDied {
 
-        log.slowPrintln("The Trogg swings his club!");
-        log.unitSay(this,"Gruahhaa!");
-        player.takeDamage(1);
-        JukeBox.playMP3(JukeBox.WOODHIT);
+        if (!notfirstLine) {
+
+            log.slowPrintln("The Trogg swings his club!");
+            log.unitSay(this, "You try to take HELM?! Gruahhaa!");
+            player.takeDamage(1);
+            JukeBox.playMP3(JukeBox.WOODHIT);
+            notfirstLine = true;
+        } else {
+            log.slowPrintln("The Trogg swings his club!");
+            log.unitSay(this, "Gruahhaa!");
+            player.takeDamage(1);
+            JukeBox.playMP3(JukeBox.WOODHIT);
+        }
+
     }
     @Override
     public int calculateDamageDealt() {

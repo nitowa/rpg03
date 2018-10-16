@@ -17,7 +17,7 @@ public class myFirstGame extends Game {
         Inventory inventory = new Inventory(log, 10);
         Player player = new rpgPlayer("Player", 10,0,1, inventory, log);
 
-        State first =      new G1R0(0, log, player);
+        State first = new G1R0(0, log, player);
         new RockyRoom(-1, log, player);
         new G1R1(1, log, player);
         new G1R2(2, log, player);
