@@ -7,7 +7,7 @@ import java.util.Map;
 import GameLogic.State.MapManager;
 import GameLogic.State.Player;
 import GameLogic.State.State;
-import GameLogic.State.UI.*;
+import GameLogic.UI.*;
 import myFirstGame.Items.Charcoal;
 import myFirstGame.RoomTemplates.StartingAreaTemplateRoom;
 

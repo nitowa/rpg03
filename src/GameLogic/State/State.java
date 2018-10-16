@@ -9,9 +9,9 @@ import GameLogic.Inventory.Items.ConsumableItem;
 import GameLogic.Inventory.Items.EquippableItem;
 import GameLogic.Inventory.Items.Item;
 import GameLogic.Inventory.Items.UsableItem;
-import GameLogic.State.UI.JukeBox;
-import GameLogic.State.UI.Log;
-import GameLogic.State.UI.UIColors;
+import GameLogic.UI.JukeBox;
+import GameLogic.UI.Log;
+import GameLogic.UI.UIColors;
 
 public abstract class State{
 
@@ -199,7 +199,7 @@ public abstract class State{
             case "":
                 log.slowPrintln(searchText);
                 if (exits != null && exits.size() > 0)
-                    log.slowPrintColored(getExitTexts(), UIColors.DIRECTIONS);
+                    log.slowPrintlnColored(getExitTexts(), UIColors.DIRECTIONS);
                 break;
         }
     }

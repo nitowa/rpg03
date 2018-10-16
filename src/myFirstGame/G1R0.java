@@ -3,7 +3,7 @@ package myFirstGame;
 import java.util.HashMap;
 import java.util.Map;
 
-import GameLogic.State.UI.*;
+import GameLogic.UI.*;
 import GameLogic.State.*;
 import myFirstGame.Items.HealthPotion;
 import myFirstGame.Items.Rock;

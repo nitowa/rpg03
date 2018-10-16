@@ -1,7 +1,6 @@
-package GameLogic.State.UI;
+package GameLogic.UI;
 
 import java.awt.event.*;
-import java.lang.reflect.InvocationTargetException;
 
 import javax.swing.*;
 import javax.swing.text.*;

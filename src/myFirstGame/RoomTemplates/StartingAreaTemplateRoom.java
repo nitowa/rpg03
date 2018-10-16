@@ -2,9 +2,8 @@ package myFirstGame.RoomTemplates;
 
 import GameLogic.State.InitState;
 import GameLogic.State.Player;
-import GameLogic.State.UI.JukeBox;
-import GameLogic.State.UI.Log;
-import myFirstGame.myFirstGame;
+import GameLogic.UI.JukeBox;
+import GameLogic.UI.Log;
 
 public abstract class StartingAreaTemplateRoom extends InitState {
     public StartingAreaTemplateRoom(int id, Log log, Player player, String searchText) {

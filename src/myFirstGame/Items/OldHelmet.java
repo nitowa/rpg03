@@ -3,9 +3,7 @@ package myFirstGame.Items;
 
 
 import GameLogic.Inventory.Items.HelmArmor;
-import GameLogic.State.UI.UIColors;
-
-import java.awt.*;
+import GameLogic.UI.UIColors;
 
 public class OldHelmet extends HelmArmor {
 

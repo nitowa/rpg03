@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import GameLogic.State.State;
-import GameLogic.State.UI.*;
+import GameLogic.UI.*;
 import myFirstGame.Items.Plank;
 import myFirstGame.RoomTemplates.ForestTemplateRoom;
 

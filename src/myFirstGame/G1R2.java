@@ -2,7 +2,7 @@ package myFirstGame;
 
 
 import GameLogic.State.*;
-import GameLogic.State.UI.Log;
+import GameLogic.UI.Log;
 import myFirstGame.Items.OldHelmet;
 import myFirstGame.Items.WoodenClub;
 

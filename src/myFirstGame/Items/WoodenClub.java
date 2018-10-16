@@ -1,7 +1,7 @@
 package myFirstGame.Items;
 
 import GameLogic.Inventory.Items.Weapon;
-import GameLogic.State.UI.UIColors;
+import GameLogic.UI.UIColors;
 
 public class WoodenClub extends Weapon {
     public WoodenClub() {

@@ -1,9 +1,7 @@
 package GameLogic.State;
 
-import java.awt.*;
-
-import GameLogic.State.UI.Log;
-import GameLogic.State.UI.UIColors;
+import GameLogic.UI.Log;
+import GameLogic.UI.UIColors;
 
 public abstract class Unit {
 

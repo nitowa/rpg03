@@ -1,9 +1,8 @@
 package GameLogic.Inventory.Items;
 
 import java.awt.*;
-import java.io.Serializable;
 
-import GameLogic.State.UI.UIColors;
+import GameLogic.UI.UIColors;
 
 public abstract class Item{
     protected String name;

@@ -1,11 +1,10 @@
-package GameLogic.State.UI;
+package GameLogic.UI;
 
 
 import javafx.embed.swing.JFXPanel;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.Media;
 
-import java.io.File;
 import java.net.URISyntaxException;
 import java.util.HashMap;
 import java.util.Map;

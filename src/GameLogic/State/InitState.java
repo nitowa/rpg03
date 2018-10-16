@@ -1,6 +1,6 @@
 package GameLogic.State;
 
-import GameLogic.State.UI.Log;
+import GameLogic.UI.Log;
 
 public abstract class InitState extends State {
     public InitState(int id, Log log, Player player, String searchText) {

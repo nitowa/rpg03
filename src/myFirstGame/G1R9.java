@@ -4,8 +4,8 @@ import GameLogic.Inventory.Items.Item;
 import GameLogic.State.MapManager;
 import GameLogic.State.Player;
 import GameLogic.State.State;
-import GameLogic.State.UI.JukeBox;
-import GameLogic.State.UI.Log;
+import GameLogic.UI.JukeBox;
+import GameLogic.UI.Log;
 import myFirstGame.Items.Plank;
 import myFirstGame.RoomTemplates.ForestTemplateRoom;
 

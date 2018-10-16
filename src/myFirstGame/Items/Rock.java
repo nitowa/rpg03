@@ -1,9 +1,7 @@
 package myFirstGame.Items;
 
 import GameLogic.Inventory.Items.Item;
-import GameLogic.State.UI.UIColors;
-
-import java.awt.*;
+import GameLogic.UI.UIColors;
 
 public class Rock extends Item {
     public Rock() {

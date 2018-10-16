@@ -1,15 +1,13 @@
 package myFirstGame;
 
-import java.awt.*;
-
 import GameLogic.Game;
 import GameLogic.Inventory.Inventory;
 
 
 import GameLogic.State.Player;
 import GameLogic.State.State;
-import GameLogic.State.UI.Log;
-import GameLogic.State.UI.*;
+import GameLogic.UI.Log;
+import GameLogic.UI.*;
 public class myFirstGame extends Game {
 
 
@@ -36,7 +34,7 @@ public class myFirstGame extends Game {
         //        JukeBox.playMP3Times(JukeBox.WALK, 5);
 
         log.slowPrintln("Test started.");
-        log.printAscii("/cat.jpg");
+        //log.printAscii("/cat.jpg");
 
         first.enter();
         //printMap(log, first);

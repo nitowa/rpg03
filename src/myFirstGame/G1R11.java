@@ -1,11 +1,10 @@
 package myFirstGame;
 
-import GameLogic.State.CombatState;
 import GameLogic.State.MapManager;
 import GameLogic.State.Player;
 import GameLogic.State.State;
-import GameLogic.State.UI.JukeBox;
-import GameLogic.State.UI.Log;
+import GameLogic.UI.JukeBox;
+import GameLogic.UI.Log;
 import myFirstGame.Items.NiglusGreatHelm;
 import myFirstGame.RoomTemplates.ForestTemplateRoom;
 

@@ -1,4 +1,4 @@
-package GameLogic.State.UI;
+package GameLogic.UI;
 
 import java.awt.*;
 

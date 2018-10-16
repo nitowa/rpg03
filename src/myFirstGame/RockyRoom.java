@@ -8,7 +8,7 @@ import GameLogic.State.CombatState;
 import GameLogic.State.MapManager;
 import GameLogic.State.Player;
 import GameLogic.State.State;
-import GameLogic.State.UI.Log;
+import GameLogic.UI.Log;
 import GameLogic.State.YouDied;
 import myFirstGame.Items.Frostmourne;
 

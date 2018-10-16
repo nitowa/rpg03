@@ -1,13 +1,10 @@
 package myFirstGame;
 
-import GameLogic.Inventory.BagFullThrowable;
-import GameLogic.Inventory.Items.Item;
 import GameLogic.State.MapManager;
 import GameLogic.State.Player;
 import GameLogic.State.State;
-import GameLogic.State.UI.JukeBox;
-import GameLogic.State.UI.Log;
-import myFirstGame.Items.MuddyLegplates;
+import GameLogic.UI.JukeBox;
+import GameLogic.UI.Log;
 import myFirstGame.RoomTemplates.ForestTemplateRoom;
 
 import java.util.HashMap;

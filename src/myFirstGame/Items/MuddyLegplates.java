@@ -1,11 +1,7 @@
 package myFirstGame.Items;
 
-import com.sun.xml.internal.ws.model.ReflectAnnotationReader;
-
 import GameLogic.Inventory.Items.LegArmor;
-import GameLogic.State.UI.UIColors;
-
-import java.awt.*;
+import GameLogic.UI.UIColors;
 
 public class MuddyLegplates extends LegArmor {
 

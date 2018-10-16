@@ -1,9 +1,7 @@
 package myFirstGame.Items;
 
-import java.awt.*;
-
 import GameLogic.Inventory.Items.Weapon;
-import GameLogic.State.UI.UIColors;
+import GameLogic.UI.UIColors;
 
 public class Frostmourne extends Weapon {
     public Frostmourne() {

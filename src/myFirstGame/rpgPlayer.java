@@ -3,7 +3,7 @@ package myFirstGame;
 import GameLogic.Inventory.Inventory;
 import GameLogic.Inventory.Items.ConsumableItem;
 import GameLogic.Inventory.Items.UsableItem;
-import GameLogic.State.UI.Log;
+import GameLogic.UI.Log;
 import GameLogic.State.Player;
 import myFirstGame.Items.HealthPotion;
 

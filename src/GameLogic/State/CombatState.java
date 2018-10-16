@@ -1,6 +1,6 @@
 package GameLogic.State;
 
-import GameLogic.State.UI.Log;
+import GameLogic.UI.Log;
 
 public abstract class CombatState extends InitState {
 

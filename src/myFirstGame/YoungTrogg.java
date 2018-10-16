@@ -1,11 +1,9 @@
 package myFirstGame;
 
 import GameLogic.State.*;
-import GameLogic.State.UI.JukeBox;
-import GameLogic.State.UI.Log;
-import GameLogic.State.UI.UIColors;
-
-import java.awt.*;
+import GameLogic.UI.JukeBox;
+import GameLogic.UI.Log;
+import GameLogic.UI.UIColors;
 
 public class YoungTrogg extends Enemy {
 

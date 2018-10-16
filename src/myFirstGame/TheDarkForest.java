@@ -2,7 +2,7 @@ package myFirstGame;
 
 import GameLogic.State.Enemy;
 import GameLogic.State.Player;
-import GameLogic.State.UI.Log;
+import GameLogic.UI.Log;
 import GameLogic.State.Unit;
 import GameLogic.State.YouDied;
 

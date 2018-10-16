@@ -9,7 +9,7 @@ import GameLogic.Inventory.Items.HelmArmor;
 import GameLogic.Inventory.Items.Item;
 import GameLogic.Inventory.Items.LegArmor;
 import GameLogic.Inventory.Items.Weapon;
-import GameLogic.State.UI.Log;
+import GameLogic.UI.Log;
 
 public class Inventory {
 

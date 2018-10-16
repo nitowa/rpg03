@@ -1,11 +1,10 @@
-package GameLogic.State.UI;
+package GameLogic.UI;
 
 
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.StringTokenizer;
@@ -266,17 +265,27 @@ public class WindowLog extends Log {
         try {
             SwingUtilities.invokeAndWait(()->{
                 setScroll();
-                setCaretVisible(true);
                 String last = inputLog.get(inputLog.size()-1);
-                int offset = textArea.getText().lastIndexOf(last);
                 NavigationFilter nf = textArea.getNavigationFilter();
                 textArea.setNavigationFilter(null);
                 textArea.setEditable(true);
-                System.out.println("last "+last);
-                System.out.println("ss   "+textArea.getText().substring(offset, offset+last.length()));
-                textArea.select(offset, textArea.getDocument().getLength());
-                System.out.println("sele  "+textArea.getSelectedText());
-                textArea.setSelectionColor(c);
+
+                int offset = 0;
+                try {
+                    offset =
+                        textArea.getStyledDocument().getText(0, textArea.getStyledDocument().getLength()).lastIndexOf(last);
+                } catch (BadLocationException e) {
+                    e.printStackTrace();
+                }
+                textArea.select(offset, offset+last.length());
+                StyleContext sc = StyleContext.getDefaultStyleContext();
+                AttributeSet aset = sc.addAttribute(SimpleAttributeSet.EMPTY, StyleConstants.Foreground, c);
+                textArea.setCharacterAttributes(aset, false);
+                textArea.replaceSelection("");
+                sc = StyleContext.getDefaultStyleContext();
+                aset = sc.addAttribute(SimpleAttributeSet.EMPTY, StyleConstants.Foreground, UIColors.DEFAULT_TEXT_COLOR);
+                textArea.setCharacterAttributes(aset, false);
+
                 textArea.setNavigationFilter(nf);
                 textArea.setEditable(false);
             });

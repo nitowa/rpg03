@@ -5,11 +5,10 @@ import java.util.Map;
 
 import GameLogic.Inventory.Items.SharpWeapon;
 import GameLogic.State.State;
-import GameLogic.State.UI.*;
+import GameLogic.UI.*;
 import GameLogic.State.MapManager;
 import GameLogic.State.Player;
 import myFirstGame.Items.ShortSword;
-import myFirstGame.RoomTemplates.ForestTemplateRoom;
 import myFirstGame.RoomTemplates.StartingAreaTemplateRoom;
 
 
