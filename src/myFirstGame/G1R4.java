@@ -13,7 +13,7 @@ import myFirstGame.RoomTemplates.StartingAreaTemplateRoom;
 
 public class G1R4 extends StartingAreaTemplateRoom {
     public G1R4(int id, Log log, Player player) {
-        super(id, log, player, "Watch your step. Blocking the path is a big hole.");
+        super(id, log, player, "Watch your step. Blocking the path is a big crack in ground.");
         try {
             actions.put("jump", this.getClass().getMethod("jump", String.class));
         } catch (NoSuchMethodException e) {
@@ -29,11 +29,13 @@ public class G1R4 extends StartingAreaTemplateRoom {
 
             case "big hole":
             case "hole":
+            case "crack":
+            case "big crack":
                 JukeBox.playMP3(JukeBox.JUMP);
                 JukeBox.playMP3(JukeBox.PICKUP);
               if((int)(Math.random()*3) >0 ) {
                   riddle1Complete = true;
-                  log.slowPrintln("Puh! You successfully jump over the hole. That could have gone worse.");
+                  log.slowPrintln("Puh! You successfully jump over the crack in the ground. That could have gone worse.");
                   if (exits.containsValue(MapManager.getTile(3))) {
                       exits.remove("west");
                       exits.put("east", MapManager.getTile(5));
@@ -61,20 +63,41 @@ public class G1R4 extends StartingAreaTemplateRoom {
         switch (what) {
             case "big hole":
             case "hole":
-
-                log.slowPrintln("A large hole.");
+            case "crack":
+            case "big crack":
+                log.slowPrintln("You get nauseous searching the crack so close to the abyss. It almost seems like it has been caused by the aggressive growth of tree roots.");
+                break;
+            case "roots":
+            case "tree roots":
+                log.slowPrintln("Both sides of the crack are covered in tree roots.");
                 break;
             default:
                 log.slowPrintln("Search what?");
 
         }
     }
+    @Override
+    public void look(String where) {
+        switch (where) {
+            case "big hole":
+            case "hole":
+            case "crack":
+            case "big crack":
+                log.slowPrintln("A large crack that continues downward a long distance.");
+                break;
+            case "roots":
+            case "tree roots":
+                log.slowPrintln("They appear to just be normal, but very large, tree roots.");
+                break;
+        }
+        super.look(where);
+    }
 
     public void move(String where) {
 
        if (!exits.containsKey(where)) {
            if (where.equals("west") || where.equals("east")) {
-           log.slowPrintln("There is a hole in the way.");
+           log.slowPrintln("There is a crack in the ground in the way.");
            return;
         }
        }

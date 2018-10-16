@@ -196,6 +196,9 @@ public abstract class State{
             case "stats":
                 player.reportStats();
                 break;
+            case "exits":
+                log.printlnColored(getExitTexts(), UIColors.DIRECTIONS);
+                break;
             case "":
                 log.slowPrintln(searchText);
                 if (exits != null && exits.size() > 0)
