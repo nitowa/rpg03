@@ -1,9 +1,4 @@
-import java.io.File;
 import java.net.URL;
-
-import GameLogic.State.UI.Img2Ascii;
-import GameLogic.State.UI.JukeBox;
-import myFirstGame.myFirstGame;
 
 public class Launcher {
 
@@ -12,6 +7,9 @@ public class Launcher {
         for(String s : System.getProperty("java.class.path").split(";")){
             System.out.println(s);
         }
-        new myFirstGame();
+        System.out.println("");
+
+        URL url = Launcher.class.getResource("cat.jpg");
+        System.out.println(url);
     }
 }
