@@ -78,9 +78,10 @@ public abstract class State{
 
 
     public void enter(){
-        if(exits == null)
+        System.out.println("Entering "+this.getClass().getSimpleName());
+        if(exits == null) {
             this.exits = exits();
-
+        }
         //print introText and call play mechanic of this state
         roomEnterLogic();
         play();
@@ -243,6 +244,7 @@ public abstract class State{
         System.out.println(this.getClass().getSimpleName()+" -["+where+"]-> "+next.getClass().getSimpleName());
         if(exits.containsKey(where)){
             JukeBox.playMP3(JukeBox.WALK);
+            System.out.println("Before enter "+next.getClass().getSimpleName());
             next.enter();
         }
 

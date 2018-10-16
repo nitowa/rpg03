@@ -46,8 +46,8 @@ public class G1R5 extends StartingAreaTemplateRoom {
     public void cut(String what) {
 
         if(!(player.getInventory().getWeapon() instanceof SharpWeapon)) {
-        log.slowPrintln("You dont have a sharp weapon equipped.");
-        return;
+            log.slowPrintln("You dont have a sharp weapon equipped.");
+            return;
         }
 
         switch (what) {
@@ -59,23 +59,19 @@ public class G1R5 extends StartingAreaTemplateRoom {
                 JukeBox.playMP3(JukeBox.BACKGROUND_WIND, true);
                 log.slowerPrintln("A cold chill passes through the hole you made. You can now move further.");
                 searchText= "You see an old murk-rotten sign and an entrance to the Dark Forest that you made.";
-
-               exits.put("hole", MapManager.getTile(6));
                 cutComplete=true;
                 break;
             case "half-rotten sign":
                 case "sign":
                 log.slowPrintln("The sign doesn't need to go through more than it already has.");
-
                 break;
-
             default:
                 JukeBox.playMP3(JukeBox.SWORDHIT);
                 log.slowPrintln("You cut into the air.");
-
         }
 
     }
+
     public void read(String what) {
 
         switch (what) {
@@ -97,7 +93,6 @@ public class G1R5 extends StartingAreaTemplateRoom {
         switch (what) {
             case "half-rotten sign":
             case "sign":
-
                 log.slowerPrintln("Do not e ter th Dark F rest.");
                 break;
             case "large branches":
@@ -122,19 +117,23 @@ public class G1R5 extends StartingAreaTemplateRoom {
 
     }
 
+    @Override
     public void move(String where) {
         switch (where) {
             case "hole":
             case "east":
                 if (!cutComplete) {
                     log.slowPrintln("There are branches in the way.");
-                }
-                if (cutComplete) {
+                    break;
+                }else  {
                     log.slowerPrintln("You crawl through the hole in the branches.");
-                } 
-            }
-            super.move(where);
+                }
+                super.move("hole");
+            break;
+            default:
+                super.move(where);
         }
+    }
 
 
     @Override
@@ -142,6 +141,7 @@ public class G1R5 extends StartingAreaTemplateRoom {
     public Map<String, State> exits() {
         Map<String, State> map = new HashMap<>();
         map.put("west", MapManager.getTile(4));
+        map.put("hole", MapManager.getTile(6));
         return map;
 
     }

@@ -40,11 +40,11 @@ public class JukeBox extends JFXPanel {
 
     private static JFXPanel panel = new JFXPanel();
 
-    public static final void playMP3(String file) {
+    public static synchronized final void playMP3(String file) {
         playMP3Times(file, 1);
     }
 
-    public static final void stopAllLoopsExcept(String file){
+    public static synchronized final void stopAllLoopsExcept(String file){
         for(String key : looping.keySet()){
             if(!key.equals(file)) {
                 stopLoop(key);
@@ -52,28 +52,27 @@ public class JukeBox extends JFXPanel {
         }
     }
 
-    public static final void stopLoop(){
+    public synchronized static final void stopLoop(){
         for(String file : looping.keySet()){
             stopLoop(file);
         }
     }
 
-    public static final void stopLoop(String file){
+    public synchronized static final void stopLoop(String file){
         if(looping.containsKey(file)){
             looping.get(file).setCycleCount(0);
             looping.get(file).stop();
-            looping.remove(file);
         }
     }
 
 
-    public static final void playMP3(String file, boolean loop){
+    public synchronized static final void playMP3(String file, boolean loop){
         if(loop)
             playMP3Times(file, -1);
         else
             playMP3Times(file, 1);
     }
-    public static final void playMP3Times(String file, int count){
+    public synchronized static final void playMP3Times(String file, int count){
 
         if(!looping.containsKey(file)){
 
@@ -83,6 +82,10 @@ public class JukeBox extends JFXPanel {
             } catch (URISyntaxException e) {
                 e.printStackTrace();
             }
+
+            if(hit == null)
+                throw new RuntimeException("Unable to play music track "+file);
+
             MediaPlayer mediaPlayer = new MediaPlayer(hit);
             mediaPlayer.setCycleCount(count);
             if(count == -1)
@@ -90,8 +93,5 @@ public class JukeBox extends JFXPanel {
             mediaPlayer.play();
             mediaPlayer.setVolume(1);
         }
-
-
     }
-
 }
