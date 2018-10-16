@@ -17,13 +17,22 @@ public class G1R1 extends StartingAreaTemplateRoom {
     }
 
     @Override
-    public void duck(String under) {
-
-    }
-
-    @Override
-    public void jump(String where) {
-
+    public void look (String where) {
+    switch (where) {
+        case "camp":
+        log.slowPrintln("Looks like a camp for two people. Everything of value appears to have been pillaged.");
+        break;
+        case "fire":
+        log.slowPrintln("A fireplace. Made for holding fire, most likely.");
+        addTakeable(new Charcoal());
+        break;
+        case "logs":
+        log.slowPrintln("Certainly good for sitting.");
+        break;
+        case "chairs":
+        log.slowPrintln("Certainly good for logging.");
+        break;
+     } super.look(where);
     }
 
     @Override

@@ -37,15 +37,13 @@ public abstract class State{
         MapManager.addTile(this);
     }
 
-    private void setDefaultActions(){
+    private final void setDefaultActions(){
         try {
             actions.put("look", this.getClass().getMethod("look", String.class));
             actions.put("use", this.getClass().getMethod("use", String.class));
             actions.put("drop", this.getClass().getMethod("drop", String.class));
             actions.put("search", this.getClass().getMethod("search", String.class));
             actions.put("move", this.getClass().getMethod("move", String.class));
-            actions.put("jump", this.getClass().getMethod("jump", String.class));
-            actions.put("duck", this.getClass().getMethod("duck", String.class));
             actions.put("help", this.getClass().getMethod("help", String.class));
             actions.put("take", this.getClass().getMethod("take", String.class));
             actions.put("equip", this.getClass().getMethod("equip", String.class));
@@ -56,7 +54,7 @@ public abstract class State{
         }
     }
 
-    protected String readAndExecuteAction(){
+    protected final String readAndExecuteAction(){
         String identifier = log.read().trim().toLowerCase();
         String[] splitArgs = identifier.split(" ", 2);
         try {
@@ -88,7 +86,7 @@ public abstract class State{
         play();
     }
 
-    private void play(){
+    private final void play(){
         while (true)
             readAndExecuteAction();
     }
@@ -116,7 +114,7 @@ public abstract class State{
         }
     }
 
-    public void drop(String what){
+    public final void drop(String what){
         Item item = player.getInventory().getItemByIndexOrName(what);
 
         if(item != null){
@@ -128,25 +126,25 @@ public abstract class State{
         }
     }
 
-    protected void addTakeable(Item item){
+    protected final void addTakeable(Item item){
         if(takeableItems.containsKey(item.toString().toLowerCase())){
             addTakeable(item, 1);
         }else
             takeableItems.put(item.toString().toLowerCase(), item);
     }
 
-    private void addTakeable(Item item, int index){
+    private final void addTakeable(Item item, int index){
         if(takeableItems.containsKey(item.toString().toLowerCase()+" "+index)){
             addTakeable(item, index+1);
         }else
             takeableItems.put(item.toString().toLowerCase()+" "+index, item);
     }
 
-    protected void removeTakeable(String name){
+    protected final void removeTakeable(String name){
         takeableItems.remove(name);
     }
 
-    public void equip(String what){
+    public final void equip(String what){
         Item item = player.getInventory().getItemByIndexOrName(what);
 
         if(item instanceof EquippableItem) {
@@ -159,7 +157,7 @@ public abstract class State{
         }
     }
 
-    public void unequip(String what){
+    public final void unequip(String what){
 
         player.getInventory().unequip(what);
         JukeBox.playMP3(JukeBox.UNEQUIP);
@@ -191,7 +189,7 @@ public abstract class State{
 
     public void look(String at){
 
-        switch (at){
+        switch (at) {
             case "inventory":
                 player.getInventory().listItems();
                 break;
@@ -200,15 +198,13 @@ public abstract class State{
                 break;
             case "":
                 log.slowPrintln(searchText);
-                if(exits != null && exits.size() > 0)
+                if (exits != null && exits.size() > 0)
                     log.slowPrintColored(getExitTexts(), UIColors.DIRECTIONS);
                 break;
-            default:
-                log.slowPrintln("You see your surroundings. To look closer at something, try search!");
         }
     }
 
-    public void takeable(String st){
+    public final void takeable(String st){
         log.slowPrintln("Takeable items: ");
         for(Item i : takeableItems.values()){
             log.printlnItemColored(i);
@@ -231,12 +227,10 @@ public abstract class State{
         }
     }
 
-    public String getExitTexts(){
-
-
+    private String getExitTexts(){
         String directions = "";
         for(String s : exits.keySet())
-            directions += s+" ";
+            directions += "["+s+"] ";
 
         return "Available exits: "+directions;
     }
@@ -253,19 +247,15 @@ public abstract class State{
 
     }
 
-    public int getId(){
+    public final int getId(){
         return id;
     }
 
-    public void roomEnterLogic(){}
+    @Deprecated
+    public void roomEnterLogic(){
+    }
 
-    public abstract void duck(String under);
-    public abstract void jump(String where);
     public abstract void search(String what);
     public abstract Map<String, State> exits();
-    public Map<String, State> getCurrentExits(){
-        return exits;
-    };
-
 
 }

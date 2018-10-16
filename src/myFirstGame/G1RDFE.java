@@ -12,7 +12,7 @@ import java.util.Map;
 
 public class G1RDFE extends ForestTemplateRoom {
     public G1RDFE(int id, Log log, Player player) {
-        super(id, log, player, "You feel uneasy. Not much light gets through the trees.\nDead leaves cover the ground.");
+        super(id, log, player, "You are at the entrance of the dark forest. It's dark and cold here. Dead leaves cover the ground.");
 
     }
 
@@ -42,15 +42,6 @@ public class G1RDFE extends ForestTemplateRoom {
          super.take(what);
 
     }
-    @Override
-    public void duck(String under) {
-
-    }
-
-    @Override
-    public void jump(String where) {
-
-    }
 
     @Override
     public void search(String what) {
@@ -61,7 +52,7 @@ public class G1RDFE extends ForestTemplateRoom {
     public Map<String, State> exits() {
         Map<String, State> map = new HashMap<>();
         map.put("east", MapManager.getTile(7));
-        map.put("west", MapManager.getTile(5));
+        map.put("hole", MapManager.getTile(5));
         return map;
 
     }

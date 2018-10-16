@@ -6,6 +6,7 @@ import java.util.Map;
 import GameLogic.State.UI.*;
 import GameLogic.State.*;
 import myFirstGame.Items.HealthPotion;
+import myFirstGame.Items.Rock;
 import myFirstGame.Items.rottenBranch;
 import myFirstGame.RoomTemplates.StartingAreaTemplateRoom;
 
@@ -14,26 +15,30 @@ public class G1R0 extends StartingAreaTemplateRoom {
         super(id, log, player, "theres not much to see except for a few rocks, and a couple of rotten branches.");
     }
 
-    boolean PotionFoundComplete = false;
-    boolean branchFoundComplete = false;
-    @Override
-    public void duck(String under) {
-
-    }
-
-    @Override
-    public void jump(String where) {
-
-    }
+    private boolean PotionFoundComplete = false;
+    private boolean branchFoundComplete = false;
 
     @Override
     public void look(String where) {
 
         if (!branchFoundComplete && where.equals("")) {
             addTakeable(new rottenBranch());
+            addTakeable(new Rock());
             branchFoundComplete = true;
-        } super.look(where);
+        }
+        switch (where) {
 
+            case "rotten branches":
+            case "branch":
+            case "branches":
+                log.slowPrintln("Some rotten branches.");
+                break;
+            case "rock":
+            case "rocks":
+                    log.slowPrintln("Some rocks. One of them appears to give away a faint red glow from under it.");
+                break;
+        }
+        super.look(where);
     }
 
     @Override
@@ -68,6 +73,11 @@ public class G1R0 extends StartingAreaTemplateRoom {
 
         switch (what) {
 
+            case "rocks":
+            case "rock":
+                what = "rock";
+                break;
+
             case ("rotten branch"):
             case ("rotten branches"):
             case ("branches") :
@@ -77,12 +87,10 @@ public class G1R0 extends StartingAreaTemplateRoom {
                 break;
 
             case ("old dusty potion"):
-
-                what = "health potion";
-
             case ("potion"):
 
                 what = "health potion";
+                break;
 
 
         }super.take(what);

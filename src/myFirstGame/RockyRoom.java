@@ -28,17 +28,7 @@ public class RockyRoom extends CombatState {
             e.printStackTrace();
         }
     }
-
-    @Override
-    public void duck(String under) {
-
-    }
-
-    @Override
-    public void jump(String where) {
-
-    }
-
+    
     public void smash(String what){
         switch (what){
             case "rocks":
@@ -124,6 +114,11 @@ public class RockyRoom extends CombatState {
 
     @Override
     public void cast(String spell){
+
+    }
+
+    @Override
+    protected void onEnter() {
 
     }
 }

@@ -15,13 +15,25 @@ public class YoungTrogg extends Enemy {
         super("Trogg", 3, 1, 1, p, log);
     }
 
+
+    boolean troggDead = false;
+
+    public boolean getHelmetoff() {
+        return helmetOff;
+    }
+
+    public boolean troggDone () {
+        return troggDead;
+
+    }
+
     @Override
     protected void performAction(Unit target) throws YouDied {
 
         log.slowPrintln("The Trogg swings his club!");
-        JukeBox.playMP3(JukeBox.WOODHIT);
         log.unitSay(this,"Gruahhaa!");
         player.takeDamage(1);
+        JukeBox.playMP3(JukeBox.WOODHIT);
     }
     @Override
     public int calculateDamageDealt() {
@@ -33,8 +45,8 @@ public class YoungTrogg extends Enemy {
 
         if(currHP <= 1 && (attackTarget.equals("head"))) {
             JukeBox.playMP3(JukeBox.UNARMEDHIT);
-            log.slowerPrintln("You finally land a blow on the putrid creatures head! In its dazed state, the Trogg stumbles away.");
-
+            log.slowerPrintln("You land a blow on the putrid creatures head! In its dazed state, the Trogg drops its club and stumbles away.");
+            troggDead = true;
             throw new YouDied(this);
 
         }
@@ -52,7 +64,7 @@ public class YoungTrogg extends Enemy {
         }
         else if (helmetOff && attackTarget.equals("head")) {
             JukeBox.playMP3(JukeBox.UNARMEDHIT);
-            log.slowerPrintln("You land a blow on the putrid creatures head! In its dazed state, the Trogg stumbles away.");
+            log.slowerPrintln("You land a blow on the putrid creatures head! In its dazed state, the Trogg drops its club and stumbles away.");
             throw new YouDied(this);
 
         }else{
