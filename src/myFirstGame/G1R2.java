@@ -38,16 +38,15 @@ public class G1R2 extends CombatState {
             case "ground":
             case "floor":
             case "forest floor":
-
                 if (troggRan) {
                     log.slowPrintln("The forest floor has been slightly disturbed by the event. The Troggs club and helmet lie on the ground.");
-                    break;
                 }
-                super.look(where);
         }
+        super.look(where);
     }
 
-    public void onEnter() {
+    @Override
+    public void roomEnterLogic() {
         if(!troggRan) {
             log.slowerPrintln("You take a step forward and see a Forest Trogg walking by. \nYou try to not make noise, but the Trogg sees you and attacks.");
 
@@ -159,5 +158,10 @@ public class G1R2 extends CombatState {
     @Override
     public void cast(String spell){
 
+    }
+
+    @Override
+    protected void onEnter() {
+        //see roomenterlogic
     }
 }

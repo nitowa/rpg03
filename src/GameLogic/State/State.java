@@ -83,6 +83,7 @@ public abstract class State{
             this.exits = exits();
 
         //print introText and call play mechanic of this state
+        roomEnterLogic();
         play();
     }
 
@@ -230,7 +231,7 @@ public abstract class State{
     private String getExitTexts(){
         String directions = "";
         for(String s : exits.keySet())
-            directions += s+" ";
+            directions += "["+s+"] ";
 
         return "Available exits: "+directions;
     }
@@ -250,6 +251,10 @@ public abstract class State{
 
     public final int getId(){
         return id;
+    }
+
+    @Deprecated
+    public void roomEnterLogic(){
     }
 
     public abstract void search(String what);
