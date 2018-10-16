@@ -209,10 +209,9 @@ public abstract class State{
 
     public final void takeable(String st){
         log.slowPrintln("Takeable items: ");
-        for(Item i : takeableItems.values()){
-            log.printlnItemColored(i);
+        for(Map.Entry<String, Item> e : takeableItems.entrySet()){
+            log.printlnColored(e.getKey(), e.getValue().getColor());
         }
-
     }
 
     public void take(String what){
