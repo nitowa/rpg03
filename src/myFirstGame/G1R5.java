@@ -123,16 +123,18 @@ public class G1R5 extends StartingAreaTemplateRoom {
     }
 
     public void move(String where) {
-        if (where.equals("hole") || (where.equals("east"))) {
-            if (!cutComplete) {
-                log.slowPrintln("There are branches in the way.");
+        switch (where) {
+            case "hole":
+            case "east":
+                if (!cutComplete) {
+                    log.slowPrintln("There are branches in the way.");
+                }
+                if (cutComplete) {
+                    log.slowerPrintln("You crawl through the hole in the branches.");
+                } 
             }
-            if (cutComplete) {
-                log.slowerPrintln("You crawl through the hole in the branches.");
-            }
+            super.move(where);
         }
-        super.move(where);
-    }
 
 
     @Override

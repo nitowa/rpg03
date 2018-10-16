@@ -98,7 +98,6 @@ public abstract class State{
             log.slowPrint("You drink ");
             log.printlnItemColored(item);
             player.consumeItem((ConsumableItem) item);
-            player.getInventory().silentRemove(item);
             return;
         }
         if(item instanceof UsableItem){

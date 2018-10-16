@@ -58,9 +58,6 @@ public class G1R3 extends StartingAreaTemplateRoom {
             case "leather shoes":
                 what = "leather boots";
                 break;
-            default:
-                super.take(what);
-
         }
         super.take(what);
 

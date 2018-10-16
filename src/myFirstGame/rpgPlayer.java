@@ -1,10 +1,12 @@
 package myFirstGame;
 
+import GameLogic.Inventory.BagFullThrowable;
 import GameLogic.Inventory.Inventory;
 import GameLogic.Inventory.Items.ConsumableItem;
 import GameLogic.Inventory.Items.UsableItem;
 import GameLogic.UI.Log;
 import GameLogic.State.Player;
+import myFirstGame.Items.EmptyVial;
 import myFirstGame.Items.HealthPotion;
 
 public class rpgPlayer extends Player {
@@ -21,6 +23,12 @@ public class rpgPlayer extends Player {
     public void consumeItem(ConsumableItem item) {
         if(item instanceof HealthPotion) {
             this.restoreHP(5);
+            this.getInventory().silentRemove(item);
+            try {
+                getInventory().add(new EmptyVial());
+            } catch (BagFullThrowable bagFullThrowable) {
+                //cant happen.
+            }
         }
     }
 
