@@ -21,7 +21,7 @@ public class G1R7 extends ForestTemplateRoom {
 
     @Override
     public void onEnter(){
-        if (roomsLooped < 7) {
+        if (roomsLooped < 8) {
             JukeBox.playMP3(JukeBox.WALK_DIZZY);
             if (roomsLooped !=0){
                 switch (roomsLooped) {
@@ -32,16 +32,16 @@ public class G1R7 extends ForestTemplateRoom {
                         log.slowerPrintln("..Have you not been here before?");
                         break;
                     case 3:
-                        log.slowerPrintln("..You're sure you were just here.");
-                        break;
-                    case 5:
-                        log.slowerPrintln("..What is going on?");
+                        log.slowerPrintln("You start to feel dizzy.");
                         break;
                     case 4:
+                        log.slowerPrintln("..What is going on?");
+                        break;
+                    case 5:
                         log.slowerPrintln("The wind is almost unbearable.");
                         break;
                     case 6:
-                        log.slowerPrintln("You start to feel dizzy.");
+                        log.slowerPrintln("You fight through the nausea and the harsh winds. ");
                         break;
                     default :
                         log.slowerPrintln("For some reason the wind starts to subside. You feel the temperature start to go back to normal.\nWhat just happened?");
@@ -50,7 +50,7 @@ public class G1R7 extends ForestTemplateRoom {
             }
             roomsLooped++;
         } else {
-            searchText = "Upon inspection, the forest appears completely normal..";
+            searchText = "Upon inspection, the forest now appears completely normal again..";
             exits.clear();
             exits.put("south", MapManager.getTile(8));
             exits.put("west", MapManager.getTile(6));

@@ -42,7 +42,7 @@ public class G1R11 extends ForestTemplateRoom {
            treesMoved = true;
 
             log.slowPrintln("The dark forest starts shifting around you, the trees twisting and growing to close off all possible escape routes.");
-            JukeBox.playMP3Times(JukeBox.MOVINGTREES, 5);
+            JukeBox.playMP3Times(JukeBox.MOVINGTREES, 1);
                 Thread.sleep(4000);
             log.slowerPrintln("There is nowhere to go.");
             Thread.sleep(650);
@@ -68,9 +68,9 @@ public class G1R11 extends ForestTemplateRoom {
             Thread.sleep(850);
             log.unitSay(TheDarkForest,"I accept your words, Child. And thus, I must ask you a favour.",50);
             Thread.sleep(850);
-            log.unitSay(TheDarkForest,"You see Child, a long time ago, there was a legend of four men.",50 );
+            log.unitSay(TheDarkForest,"You see Child, a long time ago, there once lived four men.",50 );
             Thread.sleep(650);
-            log.unitSay(TheDarkForest,"The Legends said they had fought the very gods themselves, and used their fountains to infuse their armour with holy magic.",50 );
+            log.unitSay(TheDarkForest,"The people of the time said they had fought the very gods themselves, and used their fountains to infuse their armour with holy magic.",50 );
             Thread.sleep(650);
             log.unitSay(TheDarkForest,"I was a young tree then, and did not know anything about such tales.",50 );
             Thread.sleep(650);
@@ -78,7 +78,7 @@ public class G1R11 extends ForestTemplateRoom {
             Thread.sleep(850);
             log.unitSay(TheDarkForest,"The men from these legends came to me.",50 );
             Thread.sleep(850);
-            log.unitSay(TheDarkForest,"They were old, and had all come to the conclusion that these relics could not be trusted to people who had not seen the land of the gods for themselves.",50 );
+            log.unitSay(TheDarkForest,"They were old, and had decided that these relics could not be trusted to people who had not seen the land of the gods for themselves.",50 );
             Thread.sleep(850);
             log.unitSay(TheDarkForest,"And so they chose the least obvious place they could think of.",50 );
             Thread.sleep(850);
@@ -108,9 +108,7 @@ public class G1R11 extends ForestTemplateRoom {
             Thread.sleep(900);
             log.unitSay(TheDarkForest,"If that is the case, a hero with one relic in their possession would hold the power to gather them all.",50 );
             Thread.sleep(900);
-            log.unitSay(TheDarkForest,"Perhaps...",80 );
-            Thread.sleep(900);
-            log.unitSay(TheDarkForest,"You will be that hero.",50 );
+            log.unitSay(TheDarkForest,"Perhaps you will be that hero.",50 );
             Thread.sleep(900);
             log.unitSay(TheDarkForest,"Very well.",50 );
             Thread.sleep(900);
@@ -118,9 +116,7 @@ public class G1R11 extends ForestTemplateRoom {
             Thread.sleep(900);
             log.unitSay(TheDarkForest,"Take it, and use its power to claim the others. And when you are done, bring them back here.",50 );
             Thread.sleep(900);
-            log.unitSay(TheDarkForest,"If you do not, your fate will be the same as the ones who have tried to control these relics before you.",50 );
-            Thread.sleep(900);
-            log.unitSay(TheDarkForest,"But you are not like them.",50 );
+            log.unitSay(TheDarkForest,"If you do not, your fate will be the same as the ones who have tried to control these relics before you. But you are not like them.",50 );
             Thread.sleep(900);
             log.unitSay(TheDarkForest,"Now, touch the roots, Child. I am ready.",50 );
 
@@ -150,9 +146,9 @@ public class G1R11 extends ForestTemplateRoom {
                     Thread.sleep(650);
                     log.unitSay(TheDarkForest,"Niglu's Great Helm.",70 );
                     Thread.sleep(900);
-                    log.unitSay(TheDarkForest,"It holds many powers, which im sure will be revealed to you in time.",70 );
+                    log.unitSay(TheDarkForest,"It holds many powers, which I am sure will be revealed to you in time.",70 );
                     Thread.sleep(900);
-                    log.unitSay(TheDarkForest,"Once you take it, I will no longer have enough magic to keep myself alive. But I was not meant to ever be more than a tree, so to have a life at all has been a great gift.",60);
+                    log.unitSay(TheDarkForest,"Once you take it, I will no longer have enough magic to keep myself alive. But I was not meant to ever be more than a tree, so to have a life at all has been a great gift.",50);
                    addTakeable(new NiglusGreatHelm());
                    break;
             }

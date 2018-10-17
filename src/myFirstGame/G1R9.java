@@ -31,7 +31,7 @@ public class G1R9 extends ForestTemplateRoom {
     @Override
     public void onEnter(){
         log.slowerPrintln("The trees start to shift and move. You stand back as the large branches pull the ground before you apart, leaving a gaping abyss.");
-        JukeBox.playMP3Times(JukeBox.MOVINGTREES, 2);
+        JukeBox.playMP3Times(JukeBox.MOVINGTREES, 1);
         super.onEnter();
     }
 
@@ -86,7 +86,7 @@ public class G1R9 extends ForestTemplateRoom {
 
         case "hole":
         case "abyss":
-            log.slowPrintln("Don't fall in.");
+            log.slowPrintln("You look down the hole. It stretches down far.");
         }
         super.look(where);
 
@@ -130,7 +130,7 @@ public class G1R9 extends ForestTemplateRoom {
         switch (what) {
             case "hole":
             case "abyss":
-                log.slowPrintln("Don't fall in.");
+                log.slowPrintln("You move close to the edge to take a look. The distance down to the bottom is nauseating.");
                 break;
         }
     }

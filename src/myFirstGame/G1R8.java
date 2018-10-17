@@ -33,7 +33,7 @@ public class G1R8 extends ForestTemplateRoom {
         }
         else {
             log.slowerPrintln("The trees start to shift and move to close the exit behind you.");
-            JukeBox.playMP3Times(JukeBox.MOVINGTREES, 2);
+            JukeBox.playMP3Times(JukeBox.MOVINGTREES, 1);
             try {
                 Thread.sleep(3000);
             } catch (InterruptedException e) {
@@ -119,6 +119,7 @@ public class G1R8 extends ForestTemplateRoom {
                     log.slowPrintln("You take the one plank that has not succumbed to rot.");
                     plankTakenComplete = true;
                 }
+                break;
 
 
             case ("furniture"):
