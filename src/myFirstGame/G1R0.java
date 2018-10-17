@@ -12,7 +12,7 @@ import myFirstGame.RoomTemplates.StartingAreaTemplateRoom;
 
 public class G1R0 extends StartingAreaTemplateRoom {
     public G1R0(int id, Log log, Player player) {
-        super(id, log, player, "theres not much to see except for a few rocks, and a couple of rotten branches.");
+        super(id, log, player, "You take a look around the forest. On the ground you see some rocks, and a couple of rotten branches.");
     }
 
     private boolean PotionFoundComplete = false;

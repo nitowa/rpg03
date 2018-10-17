@@ -69,7 +69,7 @@ public class G1R3 extends StartingAreaTemplateRoom {
             case "corpses":
             case "bodies":
             case "body":
-        log.slowPrintln("The bodies seem to have been dragged and pillaged.");
+        log.slowPrintln("It's a bad scene. The bodies seem to have been dragged and pillaged.");
         break;
             case "clearing":
             case "beautiful clearing":
@@ -86,7 +86,7 @@ public class G1R3 extends StartingAreaTemplateRoom {
                 case "corpses":
                 case "bodies":
                 case "body":
-                    log.slowPrintln("You find a few empty vials firmly gripped in the hands of the bodies. One body is wearing some leather boots.");
+                    log.slowPrintln("You find a few empty vials firmly gripped in the hands of the bodies. One is wearing some leather boots.");
                     break;
         }
 

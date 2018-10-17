@@ -77,18 +77,10 @@ public class YoungTrogg extends Enemy {
             throw new YouDied(this);
 
         }else{
-            switch ((int) (Math.random() * 3)) {
+            switch (0) {
                 case 0:
                     JukeBox.playMP3(JukeBox.UNARMEDHIT);
-                    log.slowPrintln("You swing and miss the Trogg completely!");
-                    return 0;
-                case 1:
-                    JukeBox.playMP3(JukeBox.UNARMEDHIT);
-                    log.slowPrintln("You swing and hit the trogg in the shoulder. Your hand hurts.");
-                    return 0;
-                case 2:
-                    JukeBox.playMP3(JukeBox.UNARMEDHIT);
-                    log.slowPrintln("You swing and land a hit on the Troggs hardened belly.");
+                    log.slowerPrintln("You swing and punch the Trogg on its hardened body. Your hand hurts. ");
                     return 0;
             }
         }

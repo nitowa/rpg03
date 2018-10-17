@@ -33,9 +33,9 @@ public class G1R4 extends StartingAreaTemplateRoom {
             case "big crack":
                 JukeBox.playMP3(JukeBox.JUMP);
                 JukeBox.playMP3(JukeBox.PICKUP);
-              if((int)(Math.random()*3) >0 ) {
+              if((int)(Math.random()*4) >0 ) {
                   riddle1Complete = true;
-                  log.slowPrintln("Puh! You successfully jump over the crack in the ground. That could have gone worse.");
+                  log.slowPrintln("You take charge and successfully jump over the crack in the ground. That could have gone worse.");
                   if (exits.containsValue(MapManager.getTile(3))) {
                       exits.remove("west");
                       exits.put("east", MapManager.getTile(5));
@@ -47,7 +47,7 @@ public class G1R4 extends StartingAreaTemplateRoom {
                   break;
             }
                else {
-                  log.slowPrintln("You slip and hit the ground when trying to make the jump. Hope nobody saw that.");
+                  log.slowPrintln("You slip and hit the ground when building up for the jump. Hope nobody saw that.");
                   break;
               }
             default:
