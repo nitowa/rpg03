@@ -27,9 +27,11 @@ import GameLogic.State.Unit;
 
 public class WindowLog extends Log {
 
+    private int shifterSize = 250;
+    private int shiftDistance = 3;
 
     //Edit font here
-    private String fontPath = "/SourceCodePro-Semibold.ttf";
+    private String fontPath = "/Mono.ttf";
     private int fontSize = 18;
 
     //print speeds
@@ -45,6 +47,10 @@ public class WindowLog extends Log {
     private Caret caret;
     private JFrame win;
     private int backIndex = 0;
+    private JPanel panel;
+    private JPanel shifter_left;
+    private JPanel shifter_right;
+    private int shifts = 0;
     private boolean doBlip = false;
     private boolean doScroll = true;
     private String fontName;
@@ -75,25 +81,25 @@ public class WindowLog extends Log {
         win = new JFrame();
         win.getContentPane().setBackground( background );
         win.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        win.setResizable(false);
+        win.setSize(1900,800);
 
-        win.setSize(1200,800);
-        JPanel panel = new JPanel(new GridLayout());
+        panel = new JPanel();
+        panel.setLayout(new BoxLayout(panel, BoxLayout.LINE_AXIS));
         panel.setDoubleBuffered(true);
+        //panel.setSize(win.getSize());
+
         textArea = new JTextPane();
         textArea.setDoubleBuffered(true);
         textArea.setCursor(Cursor.getDefaultCursor());
         textArea.setBackground(background);
         textArea.setEditable(false);
         textArea.setFont(new Font(fontName, Font.PLAIN, fontSize));
-
         textArea.getDocument().addDocumentListener(new DocumentListener() {
             @Override
-            public void insertUpdate(DocumentEvent e) {
-            }
-
+            public void insertUpdate(DocumentEvent e) {}
             @Override
-            public void removeUpdate(DocumentEvent e) {
-            }
+            public void removeUpdate(DocumentEvent e) {}
 
             @Override
             public void changedUpdate(DocumentEvent e) {
@@ -101,13 +107,7 @@ public class WindowLog extends Log {
                     setScroll();
             }
         });
-
-
         textArea.addKeyListener(new KeyListener() {
-            @Override
-            public void keyTyped(KeyEvent e) {
-            }
-
             @Override
             public void keyPressed(KeyEvent e) {
                 if(swallowInputs) {
@@ -120,6 +120,7 @@ public class WindowLog extends Log {
                     doScroll = true;
                     setScroll();
                     JukeBox.playMP3(JukeBox.TYPEWRITER_BELL);
+                    unshift();
                     return;
                 }
 
@@ -182,28 +183,46 @@ public class WindowLog extends Log {
                 }
 
                 JukeBox.playMP3(JukeBox.TYPEWRITER_TACK);
+                shift();
 
                 if(doScroll)
                     setScroll();
             }
-
             @Override
-            public void keyReleased(KeyEvent e) {
-
-            }
+            public void keyTyped(KeyEvent e) {}
+            @Override
+            public void keyReleased(KeyEvent e) {}
         });
-        scp = new ModernScrollPane(textArea);
-
-        //scp = new ScrollPane();
-        scp.setBackground(background);
 
         textArea.setCaretColor(UIColors.DEFAULT_TEXT_COLOR);
         this.caret = textArea.getCaret();
         setCaretVisible(false);
-        //scp.add(textArea);
-        panel.add(scp);
 
-        //panel.add(textField);
+        scp = new ModernScrollPane(textArea);
+        scp.setPreferredSize(new Dimension(1000, win.getHeight()));
+        scp.setMinimumSize(new Dimension(1000, win.getHeight()));
+        scp.setMaximumSize(new Dimension(1000, win.getHeight()));
+        scp.setBackground(UIColors.DEFAULT_BACKGROUND_COLOR);
+
+        shifter_left = new JPanel();
+        shifter_left.setMinimumSize(new Dimension(0, win.getHeight()));
+        shifter_left.setMaximumSize(new Dimension(shifterSize, win.getHeight()));
+        shifter_left.setSize(new Dimension(shifterSize, win.getHeight()));
+        shifter_left.setOpaque(true);
+        shifter_left.setBackground(Color.black);
+
+        shifter_right = new JPanel();
+        shifter_right.setMinimumSize(new Dimension(shifterSize, win.getHeight()));
+        shifter_right.setMaximumSize(new Dimension(shifterSize, win.getHeight()));
+        shifter_right.setPreferredSize(new Dimension(shifterSize, win.getHeight()));
+        shifter_right.setOpaque(true);
+        shifter_right.setBackground(Color.black);
+
+
+        panel.add(shifter_left);
+        panel.add(scp);
+        panel.add(shifter_right);
+
         win.add(panel);
         win.setVisible(true);
         win.createBufferStrategy(3);
@@ -310,19 +329,17 @@ public class WindowLog extends Log {
     }
 
     private void blip(char c){
-        try {
-            SwingUtilities.invokeAndWait(()->{
-                if(c == '\n')
-                    JukeBox.playMP3(JukeBox.TYPEWRITER_BELL);
-                double r = (Math.random()*2);
-                if(r >= 1.2 && doBlip){
-                    JukeBox.playMP3(JukeBox.TYPEWRITER_TACK);
-                }
-                doBlip = !doBlip;
-            });
-        } catch (InterruptedException | InvocationTargetException e) {
-            e.printStackTrace();
+        if(c == '\n') {
+            JukeBox.playMP3(JukeBox.TYPEWRITER_BELL);
+            unshift();
+            return;
         }
+        double r = (Math.random()*2);
+        if(r >= 1.2 && doBlip){
+            JukeBox.playMP3(JukeBox.TYPEWRITER_TACK);
+            shift();
+        }
+        doBlip = !doBlip;
 
     }
 
@@ -340,6 +357,50 @@ public class WindowLog extends Log {
             }
         }
     }
+
+    private void shift(){
+
+        System.out.println(shifter_left.getSize());
+        Dimension s_lSize = shifter_left.getSize();
+        Dimension afterShiftLeft = new Dimension((int)(s_lSize.getWidth()-shiftDistance), (int)(s_lSize.getHeight()));
+        shifter_left.setSize(afterShiftLeft);
+        shifter_left.setPreferredSize(afterShiftLeft);
+
+        Dimension s_rSize = shifter_right.getSize();
+        Dimension afterShiftRight = new Dimension((int)(s_rSize.getWidth()+shiftDistance), (int)(s_rSize.getHeight()));
+        shifter_right.setSize(afterShiftRight);
+        shifter_right.setPreferredSize(afterShiftRight);
+        shifts++;
+        win.pack();
+    }
+
+    private void unshift(){
+            Dimension afterShiftLeft = new Dimension((int)(shifter_left.getWidth() + (shifts*shiftDistance)), (int)(shifter_left.getHeight()));
+            shifter_left.setSize(afterShiftLeft);
+            shifter_left.setPreferredSize(afterShiftLeft);
+
+            Dimension afterShiftRight = new Dimension((int)(shifter_left.getWidth() - (shifts*shiftDistance)), (int)(shifter_left.getHeight()));
+            shifter_right.setSize(afterShiftRight);
+            shifter_right.setPreferredSize(afterShiftRight);
+
+            shifts = 0;
+            win.pack();
+
+    }
+
+    private void unshift(int n){
+
+        if(shifts - n >= 0) {
+            Dimension
+                afterShiftLeft =
+                new Dimension((int) (shifter_left.getWidth() + (shiftDistance * n)), (int) (shifter_left.getHeight()));
+
+            shifter_left.setSize(afterShiftLeft);
+            shifter_left.setPreferredSize(afterShiftLeft);
+            shifts -= n;
+        }
+    }
+
 
     @Override
     public void printSize(String msg, int fontSize) {
