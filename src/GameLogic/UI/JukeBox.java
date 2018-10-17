@@ -30,6 +30,8 @@ public class JukeBox extends JFXPanel {
     public static final String MOVINGTREES  = "/movingTrees.mp3";
     public static final String PICKUP_EPIC  = "/epicPickUp.mp3";
     public static final String WALK_DIZZY   = "/dizzyWalk.mp3";
+    public static final String TYPEWRITER_TACK="/typewriter-tack0.mp3";
+    public static final String TYPEWRITER_BELL   = "/typewriter-bell.mp3";
 
     //atmosphere tracks.
     public static final String BACKGROUND_WIND = "/wind.mp3";

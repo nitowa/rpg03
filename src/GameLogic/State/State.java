@@ -65,6 +65,7 @@ public abstract class State{
         } catch (Exception e) {
             //e.printStackTrace();
            log.println("Unknown command \'"+identifier+"\'");
+           return identifier;
         }
         if(splitArgs[0].equals("search") ||
            identifier.equals("look inventory") ||

@@ -116,10 +116,10 @@ public class WindowLog extends Log {
                 }
 
                 if(e.getExtendedKeyCode() == KeyEvent.VK_ENTER){
-
                     sem.release(1);
                     doScroll = true;
                     setScroll();
+                    JukeBox.playMP3(JukeBox.TYPEWRITER_BELL);
                     return;
                 }
 
@@ -180,6 +180,9 @@ public class WindowLog extends Log {
                 if(e.getExtendedKeyCode() == KeyEvent.VK_LEFT){
                     doScroll = false;
                 }
+
+                JukeBox.playMP3(JukeBox.TYPEWRITER_TACK);
+
                 if(doScroll)
                     setScroll();
             }
@@ -309,8 +312,11 @@ public class WindowLog extends Log {
     private void blip(char c){
         try {
             SwingUtilities.invokeAndWait(()->{
-                if(doBlip && c !=' '){
-                    JukeBox.playMP3(JukeBox.TEXT_BLIP);
+                if(c == '\n')
+                    JukeBox.playMP3(JukeBox.TYPEWRITER_BELL);
+                double r = (Math.random()*2);
+                if(r >= 1.2 && doBlip){
+                    JukeBox.playMP3(JukeBox.TYPEWRITER_TACK);
                 }
                 doBlip = !doBlip;
             });
