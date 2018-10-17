@@ -29,8 +29,8 @@ public class WindowLog extends Log {
 
 
     //Edit font here
-    private String fontPath = "/SourceCodePro-Semibold.ttf";
-    private int fontSize = 18;
+    private String fontPath = "/VT323-Regular.ttf";
+    private int fontSize = 28;
 
     //print speeds
     private int slow = 20;

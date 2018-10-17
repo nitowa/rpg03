@@ -58,6 +58,7 @@ public class G1R5 extends StartingAreaTemplateRoom {
                 log.slowerPrintln("Your sword cuts through the branches. They crack loudly and fall to the ground.");
                 JukeBox.playMP3(JukeBox.BACKGROUND_WIND, true);
                 log.slowerPrintln("A cold chill passes through the hole you made. You can now move further.");
+                exits.put("hole",MapManager.getTile(6));
                 searchText= "You see an old murk-rotten sign and an entrance to the Dark Forest that you made.";
                 cutComplete=true;
                 break;
@@ -141,7 +142,6 @@ public class G1R5 extends StartingAreaTemplateRoom {
     public Map<String, State> exits() {
         Map<String, State> map = new HashMap<>();
         map.put("west", MapManager.getTile(4));
-        map.put("hole", MapManager.getTile(6));
         return map;
 
     }

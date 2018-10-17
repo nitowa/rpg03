@@ -45,7 +45,6 @@ public class G1R3 extends StartingAreaTemplateRoom {
             case "body":
                 log.slowPrintln("Definitely not.");
                 break;
-
             case "vials":
             case "empty vials":
             case "vial":
