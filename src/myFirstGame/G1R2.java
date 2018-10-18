@@ -134,8 +134,8 @@ public class G1R2 extends CombatState {
 
         } catch (YouDied youDied) {
             addTakeable(new WoodenClub());
-            searchText = "With the Trogg gone, the forest definitely smells better.";
-            exits.put("west", MapManager.getTile(21));
+            searchText = "A now Trogg-less area. The forest definitely smells better.";
+            exits.put("west", MapManager.getTile(12));
             exits.put("south", MapManager.getTile(1));
             exits.put("north", MapManager.getTile(3));
             troggRan = true;

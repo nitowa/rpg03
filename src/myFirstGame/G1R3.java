@@ -18,19 +18,13 @@ public class G1R3 extends StartingAreaTemplateRoom {
     }
 
     private boolean vialsSpawned = false;
-    private boolean bootsSpawned = false;
+
 
     @Override
     public void onEnter() {
         if (!vialsSpawned) {
-
-            addTakeable(new EmptyVial());
             addTakeable(new EmptyVial());
             vialsSpawned = true;
-        }
-        if (!bootsSpawned) {
-            addTakeable(new LeatherBoots());
-            bootsSpawned = true;
         }
      super.onEnter();
     }
@@ -50,12 +44,6 @@ public class G1R3 extends StartingAreaTemplateRoom {
             case "vial":
             case "empty vial":
                 what = "empty vial";
-                break;
-            case "boots":
-            case "leather boots":
-            case "shoes":
-            case "leather shoes":
-                what = "leather boots";
                 break;
         }
         super.take(what);
@@ -85,7 +73,7 @@ public class G1R3 extends StartingAreaTemplateRoom {
                 case "corpses":
                 case "bodies":
                 case "body":
-                    log.slowPrintln("You find a few empty vials firmly gripped in the hands of the bodies. One is wearing some leather boots.");
+                    log.slowPrintln("You find an empty vial firmly gripped in the hands of one of the bodies. The other body is missing his boots.");
                     break;
         }
 

@@ -9,11 +9,23 @@ import GameLogic.State.Player;
 import GameLogic.State.State;
 import GameLogic.UI.*;
 import myFirstGame.Items.Charcoal;
+import myFirstGame.Items.EmptyVial;
+import myFirstGame.Items.LeatherBoots;
 import myFirstGame.RoomTemplates.StartingAreaTemplateRoom;
 
 public class G1R1 extends StartingAreaTemplateRoom {
     public G1R1(int id, Log log, Player player) {
         super(id, log, player, "It appears that someone made camp here not too long ago.\nThere are remains of a fire, and some logs that seem to have been repurposed as chairs.");
+    }
+
+    private boolean bootsSpawned = false;
+    @Override
+    public void onEnter() {
+        if (!bootsSpawned) {
+            addTakeable(new LeatherBoots());
+            bootsSpawned = true;
+        }
+        super.onEnter();
     }
 
     @Override
@@ -41,7 +53,7 @@ public class G1R1 extends StartingAreaTemplateRoom {
         switch (what) {
 
             case "camp":
-                log.slowPrintln("Looks like a camp for two people. Everything of value appears to have been pillaged.");
+                log.slowPrintln("Looks like a camp for two people. Everything of value except for a pair of leather boots has been stolen.");
                 break;
             case "fire":
 
@@ -71,18 +83,21 @@ public class G1R1 extends StartingAreaTemplateRoom {
             case ("log"):
             case ("logs"):
             case ("chairs"):
-
                 log.slowPrintln("The logs are definitely to big to carry.");
                 break;
-            default:
-                super.take(what);
+            case "boots":
+            case "leather boots":
+            case "shoes":
+            case "leather shoes":
+                what = "leather boots";
+                break;
         }
-
-
+        super.take(what);
     }
 
     @Override
-    public Map<String, State> exits() { Map<String, State> map = new HashMap<>();
+    public Map<String, State> exits() {
+        Map<String, State> map = new HashMap<>();
         map.put("north", MapManager.getTile(2));
         map.put("south", MapManager.getTile(0));
         return map;

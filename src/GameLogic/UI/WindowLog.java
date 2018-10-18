@@ -29,8 +29,8 @@ public class WindowLog extends Log {
 
 
     //Edit font here
-    private String fontPath = "/VT323-Regular.ttf";
-    private int fontSize = 28;
+    private String fontPath = "/Perfect DOS VGA 437.ttf";
+    private int fontSize = 21;
 
     //print speeds
     private int slow = 20;
@@ -561,6 +561,17 @@ public class WindowLog extends Log {
         try {
             SwingUtilities.invokeAndWait(()->{
                 textArea.setEditable(true);
+                StyleContext sc = StyleContext.getDefaultStyleContext();
+                AttributeSet aset = sc.addAttribute(SimpleAttributeSet.EMPTY, StyleConstants.Foreground, UIColors.DEFAULT_TEXT_COLOR);
+
+                aset = sc.addAttribute(aset, StyleConstants.FontFamily, fontName);
+                aset = sc.addAttribute(aset, StyleConstants.Alignment, StyleConstants.ALIGN_JUSTIFIED);
+                aset = sc.addAttribute(aset, StyleConstants.Size, fontSize);
+                try {
+                    textArea.getStyledDocument().insertString(textArea.getStyledDocument().getLength(),">",aset);
+                } catch (BadLocationException e) {
+                    e.printStackTrace();
+                }
                 setCaretVisible(true);
                 swallowInputs = false;
                 last = textArea.getDocument().getLength();

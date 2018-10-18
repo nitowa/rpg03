@@ -8,7 +8,7 @@ import GameLogic.State.State;
 import GameLogic.UI.*;
 import GameLogic.State.MapManager;
 import GameLogic.State.Player;
-import myFirstGame.Items.ShortSword;
+import myFirstGame.Items.RustySword;
 import myFirstGame.RoomTemplates.StartingAreaTemplateRoom;
 
 
@@ -35,7 +35,7 @@ public class G1R5 extends StartingAreaTemplateRoom {
     @Override
     public void onEnter(){
         if (!swordSpawned) {
-            addTakeable(new ShortSword());
+            addTakeable(new RustySword());
             swordSpawned = true;
         }
 
@@ -103,7 +103,7 @@ public class G1R5 extends StartingAreaTemplateRoom {
             case "floor" :
                 if (!swordSpawned) {
                     log.slowPrintln("There is a short sword on the floor.");
-                    addTakeable(new ShortSword());
+                    addTakeable(new RustySword());
 
                 }
             else {

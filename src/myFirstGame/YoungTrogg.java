@@ -30,15 +30,14 @@ public class YoungTrogg extends Enemy {
     protected void performAction(Unit target) throws YouDied {
 
         if (!notfirstLine) {
-
-            log.slowPrintln("The Trogg swings his club!");
             log.unitSay(this, "You try to take HELM?! Gruahhaa!");
+            log.slowPrintln("The Trogg swings his club!");
             player.takeDamage(1);
             JukeBox.playMP3(JukeBox.WOODHIT);
             notfirstLine = true;
         } else {
-            log.slowPrintln("The Trogg swings his club!");
             log.unitSay(this, "Gruahhaa!");
+            log.slowPrintln("The Trogg swings his club!");
             player.takeDamage(1);
             JukeBox.playMP3(JukeBox.WOODHIT);
         }
