@@ -11,7 +11,7 @@ import GameLogic.UI.*;
 public class myFirstGame extends Game {
 
     public myFirstGame(){
-        Log log = new WindowLog(1500,UIColors.DEFAULT_BACKGROUND_COLOR, UIColors.DEFAULT_TEXT_COLOR);//new ConsoleLog();
+        Log log = new ConsoleLog();//WindowLog(1500,UIColors.DEFAULT_BACKGROUND_COLOR, UIColors.DEFAULT_TEXT_COLOR);//new ConsoleLog();
         //Log log = new BadWindowLog();//new ConsoleLog();
         Inventory inventory = new Inventory(log, 10);
         Player player = new rpgPlayer("Player", 10,0,1, inventory, log);
